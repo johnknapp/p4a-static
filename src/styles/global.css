@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@source "../../src/**/*.{astro,html,js,jsx,ts,tsx}";
+
+@theme {
+  --font-sans: "Jost", system-ui, -apple-system, sans-serif;
+  --font-serif: "Libertinus Serif", Georgia, serif;
+  --color-p4a-bg: #111d40;
+  --color-p4a-bg0: #1e3066;
+  --color-p4a-bg1: #32498f;
+  --color-p4a-bg2: #3d5bb8;
+  --color-p4a-bg3: #305adb;
+}
