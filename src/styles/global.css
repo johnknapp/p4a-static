@@ -2,9 +2,11 @@
 
 @source "../../src/**/*.{astro,html,js,jsx,ts,tsx}";
 
-@theme {
+@theme inline {
   --font-sans: "Jost", system-ui, -apple-system, sans-serif;
   --font-serif: "Libertinus Serif", Georgia, serif;
+  --color-p4a-body: #e6ebfa;
+  --color-p4a-body0: #d4defc;
   --color-p4a-bg: #111d40;
   --color-p4a-bg0: #1e3066;
   --color-p4a-bg1: #32498f;
