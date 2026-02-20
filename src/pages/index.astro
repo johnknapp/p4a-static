@@ -1,71 +1,74 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Icon } from 'astro-icon/components'
+import SharePerspective from '../components/SharePerspective.astro';
+import StayInformedForm from '../components/StayInformedForm.vue';
+import { Icon } from 'astro-icon/components';
 ---
 
 <Layout title="The Playbook for America">
 
   <main>
 
-    <header class="bg-p4a-bg0 mb-18 drop-shadow-xl">
+    <header class="bg-p4a-bg0 mb-10">
       <div class="container py-16 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h1 class="text-4xl lg:text-6xl text-p4a-bg4 font-bold leading-18">
-            Connecting people to ideas — and ideas to <span class="text-white ">real results</span>.
+            Connecting people to ideas — and ideas to <span class="text-white">real results</span>.
           </h1>
         </div>
         <div class="flex flex-col gap-6">
           <h2 class="text-xl lg:text-2xl text-white font-semibold leading-15 tracking-wide">
-            P4A is a nonpartisan platform to shape crowdsourced ideas into structured proposals, ready for people and institutions to deliver real results.
+            P4A is a nonpartisan platform to shape crowdsourced ideas into structured proposals, ready for people and institutions to take confident action and deliver useful results.
           </h2>
-          <div class="text-center">
-            <a
-              href="https://airtable.com/appH0YK3BFKCCfUVB/pagERE8ylQTG39EZN/form"
-              target="_blank"
-              class="inline-block"
-            >
-              <button class="flex items-center justify-center gap-2 bg-p4a-bg3 hover:bg-p4a-bg4 hover:text-p4a-bg0 text-white border border-p4a-body font-bold px-36 py-4 rounded-lg shadow-lg">
-                Share your perspective <Icon class="text-2xl" name="ph:arrow-right" />
-              </button>
-            </a>
-            <p class="text-sm text-gray-300 mt-1">4-minute anonymous survey · All viewpoints encouraged</p>
-          </div>
+          <SharePerspective />
         </div>
       </div>
     </header>
-
+    
+    <div class="mb-12 text-center">
+      <div class="inline-block py-4 px-8 border border-p4a-b2 shadow-xl rounded-4xl">
+        <p class="text-p4a-bg4 text-sm">Don't miss background information on the <a class="hover:text-p4a-bg4 underline decoration-2" href="/about">About</a> page.</p>
+      </div>
+    </div>
+    
     <div class="container pb-8">
 
-      <section class="max-w-2xl mx-auto mb-8 text-p4a-bg1">
-        <h2 class="text-4xl font-bold">How it works</h2>
-        <p class="leading-relaxed mb-2">Free access for all Americans, launching in 2026.</p>
-        <div class="flex flex-row gap-2 mb-4">
-          <Icon class="text-4xl -mt-1 text-p4a-bg3" name="ph:number-circle-one-fill" />
+      <section class="max-w-3xl mx-auto mb-14 text-p4a-bg1">
+        <h2 class="text-4xl font-bold mb-2">How it works</h2>
+        <p class="leading-relaxed mb-4">Free access for all Americans, launching in 2026.</p>
+        <div class="flex flex-row gap-2 mb-4 items-start">
           <div class="">
-            <div class="text-xl font-bold">Crowdsource ideas</div>
-            <div class="">
+            <div class="flex flex-row gap-2 items-center">
+              <Icon class="text-4xl text-p4a-bg4" name="ph:number-circle-one-fill" />
+              <div class="text-xl font-bold text-p4a-bg2">Crowdsource ideas</div>
+            </div>
+            <div class="ml-10">
               Anyone can submit, discuss, and help improve ideas to address real public challenges.
               Promising ideas gain visibility through constructive dialogue and broad participation.
             </div>
           </div>
         </div>
         
-        <div class="text-p4a-bg1 flex flex-row gap-2 mb-4">
-          <Icon class="text-4xl -mt-1 text-p4a-bg3" name="ph:number-circle-two-fill" />
+        <div class="text-p4a-bg1 flex flex-row gap-2 mb-4 items-start">
           <div class="">
-            <div class="text-xl font-bold">Refine into structured proposals</div>
-            <div class="">
+            <div class="flex flex-row gap-2 items-center">
+              <Icon class="text-4xl text-p4a-bg4" name="ph:number-circle-two-fill" />
+              <div class="text-xl font-bold text-p4a-bg2">Refine into structured proposals</div>
+            </div>
+            <div class="ml-10">
               The strongest ideas are evaluated, debated, and shaped into clear, implementation-ready proposals.
               Structured sections, evidence, and defined implementation paths ensure seriousness and feasibility.
             </div>
           </div>
         </div>
-
-        <div class="text-p4a-bg1 flex flex-row gap-2 mb-4">
-          <Icon class="text-4xl -mt-1 text-p4a-bg3" name="ph:number-circle-three-fill" />
+        
+        <div class="text-p4a-bg1 flex flex-row gap-2 items-start">
           <div class="">
-            <div class="text-xl font-bold">Activate to deliver real programs</div>
-            <div class="">
+            <div class="flex flex-row gap-2 items-center">
+              <Icon class="text-4xl text-p4a-bg4" name="ph:number-circle-three-fill" />
+              <div class="text-xl font-bold text-p4a-bg2">Activate to deliver real programs</div>
+            </div>
+            <div class="ml-10">
               People and institutions collaborate to turn proposals into actionable programs with measurable public benefit.
               Execution teams, defined scope, and clear ownership move ideas from discussion to delivery.
             </div>
@@ -73,28 +76,79 @@ import { Icon } from 'astro-icon/components'
         </div>
       </section>
 
-      <section class="max-w-2xl mx-auto mb-8 text-p4a-bg1">
+      <section class="max-w-3xl mx-auto mb-14 text-p4a-bg1">
         <h2 class="text-4xl font-bold mb-2">Why it matters</h2>
-        <p class="leading-relaxed mb-2">
-          Most Americans want to improve how government works and strengthen civic life — but far fewer feel invited or equipped to act on their ideas.
+        <div class="flex flex-row gap-2 items-center text-p4a-bg2">
+          <Icon class="text-4xl" name="ph:megaphone" />
+          <p class="font-bold text-xl text-p4a-bg2">Your ideas have a place here</p>
+        </div>
+        <p class="leading-relaxed mb-4">
+           America needs our energy and our ideas — and better ways to understand one another. Playbook for America creates a space for constructive participation and serious exchange.
         </p>
-        <p class="leading-relaxed mb-2">
-          Too often, good ideas get lost in noise, partisanship, or lack of clear pathways to implementation. Discussion is easy. Real progress is harder.
+        <div class="flex flex-row gap-2 items-center text-p4a-bg2">
+          <Icon class="text-4xl" name="ph:chats-circle" />
+          <p class="font-bold text-xl text-p4a-bg2">Better technology for real progress</p>
+        </div>
+        <p class="leading-relaxed mb-4">
+          Too often, good ideas get lost in noise, partisanship, or unclear paths to implementation. Discussion is easy. Designing systems that transform ideas into action is harder.
         </p>
-        <p class="leading-relaxed">
-          A healthier democracy requires better ways to surface promising ideas, refine them constructively, and move them into action.
+        <div class="flex flex-row gap-2 items-center text-p4a-bg2">
+          <Icon class="text-4xl" name="ph:handshake" />
+           <p class="font-bold text-xl">Ideas should lead somewhere</p>
+        </div>
+        <p class="leading-relaxed ml">
+          Strong democracies don’t just generate discussion — they create structured pathways that move ideas from debate to delivery and measurable public benefit.
         </p>
       </section>
 
-      <section class="max-w-2xl mx-auto text-p4a-bg1">
-        <h2 class="text-4xl font-bold mb-2">Get involved</h2>
-        <p class="leading-relaxed">
-          Help shape the future of Playbook for America. Share your perspective, stay informed as the platform develops, or express interest in contributing your time or expertise.
-        </p>
-      </section>
+      <section class="max-w-3xl mx-auto text-p4a-bg1">
+        <h2 class="text-4xl font-bold mb-4">Get involved</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-md shadow-lg bg-p4a-body border border-p4a-bg2 flex flex-col">
+            <div class="flex-grow">
+              <h3 class="font-bold text-2xl mb-2">Share your perspective</h3>
+              <p class="mb-4 leading-relaxed">
+                We're evaluating whether Playbook for America is desirable, viable, and worth pursuing.
+                Your participation will help us shape the future of civic participation.
+              </p>
+              <p class="mb-1 leading-relaxed font-semibold">
+                In this short survey, you'll weigh in on:
+              </p>
+              <ul class="mb-4 ml-2">
+                <li class="flex items-center gap-1"><Icon class="text-lg text-p4a-bg2" name="ph:check-square" /> <span>What similar systems exist</span></li>
+                <li class="flex items-center gap-1"><Icon class="text-lg text-p4a-bg2" name="ph:check-square" /> <span>If this feels compelling</span></li>
+                <li class="flex items-center gap-1"><Icon class="text-lg text-p4a-bg2" name="ph:check-square" /> <span>Any concerns you may have</span></li>
+                <li class="flex items-center gap-1"><Icon class="text-lg text-p4a-bg2" name="ph:check-square" /> <span>Your likelihood of participating</span></li>
+              </ul>
+            </div>
+            <p class="mb-2 leading-relaxed text-sm text-center">
+              Anonymous, all perspectives invited.
+            </p>
+            <a
+              href="https://airtable.com/appH0YK3BFKCCfUVB/pagERE8ylQTG39EZN/form"
+              target="_blank"
+              class="block w-full bg-p4a-bg1 hover:bg-p4a-bg2 text-white font-bold py-3 rounded-md text-center transition-colors"
+            >
+              Take the 4-minute survey
+            </a>
+          </div>
 
+          <div class="p-6 rounded-md shadow-lg bg-p4a-body border border-p4a-bg2">
+            <h3 class="font-bold text-2xl mb-2">Stay informed</h3>
+            <p class="mb-4 leading-relaxed text-gray-700">
+              Get occasional updates as the platform develops. No spam, just meaningful progress.
+            </p>
+            <StayInformedForm client:load />
+          </div>
+        </div>
+        
+      </section>
+      
     </div>
-    
   </main>
-
+  
 </Layout>
+<!-- We’ll share occasional updates as the platform develops. -->
+<!-- <p class="leading-relaxed mb-2">
+  Help shape the future of Playbook for America. Share your perspective, stay informed as the platform develops, or express interest in contributing your time or expertise.
+</p> -->
