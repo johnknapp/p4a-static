@@ -12,4 +12,22 @@
   --color-p4a-bg1: #32498f;
   --color-p4a-bg2: #3d5bb8;
   --color-p4a-bg3: #305adb;
+  --color-p4a-bg4: #7494f2;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  .container {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }

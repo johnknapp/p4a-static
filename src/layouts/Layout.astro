@@ -20,18 +20,16 @@ const { title } = Astro.props;
       rel="stylesheet"
     />
     <title>{title}</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
   </head>
-  <body class="bg-p4a-body text-black font-sans min-h-screen">
-    <header class="bg-p4a-bg1 text-white px-8 h-[60px] flex items-center justify-between">
-      <div>The Playbook for America</div>
-      <div>The Playbook for America</div>
-      <div>The Playbook for America</div>
+  <body class="bg-p4a-body0 text-black font-sans min-h-screen">
+    <header class="bg-p4a-bg0 text-white">
+      <div class="container h-18 flex items-center justify-between">
+        <div class="font-semibold"><a href="/">The Playbook for America</a></div>
+        <nav class="flex gap-8">
+          <a href="/" class="hover:underline">Home</a>
+          <a href="/about" class="hover:underline">About</a>
+        </nav>
+      </div>
     </header>
     <slot />
   </body>
