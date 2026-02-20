@@ -16,21 +16,26 @@ const { title } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600;700;800&family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600;700;800&family=Libertinus+Serif:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
   </head>
-  <body class="bg-p4a-body0 text-black font-sans min-h-screen">
+  <body class="bg-p4a-body0 text-black font-sans min-h-screen flex flex-col">
     <header class="bg-p4a-bg0 text-white">
       <div class="container h-18 flex items-center justify-between">
-        <div class="font-semibold"><a href="/">The Playbook for America</a></div>
+        <div class="md:text-lg font-semibold"><a href="/">The Playbook for America</a></div>
         <nav class="flex gap-8">
-          <a href="/" class="hover:underline">Home</a>
-          <a href="/about" class="hover:underline">About</a>
+          <a href="/" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Home</a>
+          <a href="/about" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">About</a>
         </nav>
       </div>
     </header>
-    <slot />
+    <div class="flex-grow">
+      <slot />
+    </div>
+		<footer class="w-full mt-12 py-6 bg-p4a-bg flex items-center">
+			<p class="text-white mx-auto">&copy; The Playbook for America</p>
+		</footer>	
   </body>
 </html>

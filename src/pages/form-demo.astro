@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ExampleForm from '../components/ExampleForm.vue';
+---
+
+<Layout title="Form Demo - Playbook for America">
+  <main>
+    <div class="container pt-24 pb-16">
+      <header class="mb-12">
+        <h1 class="text-4xl text-p4a-bg1 font-bold mb-4">FormKit Demo</h1>
+        <p class="text-lg text-gray-600">
+          Example form using Vue and FormKit with POST capability
+        </p>
+      </header>
+
+      <div class="max-w-2xl mx-auto">
+        <ExampleForm client:load />
+      </div>
+    </div>
+  </main>
+</Layout>
