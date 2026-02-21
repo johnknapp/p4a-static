@@ -1,6 +1,6 @@
 # Playbook for America - Static Site
 
-A simple, single-page static website built with Astro and Tailwind CSS for the Playbook for America civic platform.
+A simple, static website built with Astro and Tailwind CSS for the Playbook for America civic platform.
 
 ## Tech Stack
 
