@@ -39,32 +39,46 @@ const submitHandler = async (data: any) => {
     const baseId = import.meta.env.PUBLIC_AIRTABLE_INFORMED_BASE_ID
     const tableName = import.meta.env.PUBLIC_AIRTABLE_INFORMED_TABLE_NAME
 
+    console.log('Env values:', {
+      apiKey: apiKey ? `${apiKey.substring(0, 10)}...` : 'MISSING',
+      baseId,
+      tableName
+    })
+
     const roleValue = data.role === 'Other' ? data.roleOther || 'Other' : data.role
 
-    const response = await fetch(
-      `https://api.airtable.com/v0/${baseId}/${tableName}`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fields: {
-            name: data.name,
-            email: data.email,
-            role: roleValue,
-          },
-        }),
-      }
-    )
+    const url = `https://api.airtable.com/v0/${baseId}/${tableName}`
+    console.log('POST URL:', url)
+
+    const payload = {
+      fields: {
+        name: data.name,
+        email: data.email,
+        role: roleValue,
+      },
+    }
+    console.log('Payload:', payload)
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    console.log('Response status:', response.status)
 
     if (!response.ok) {
-      throw new Error('Submission failed')
+      const errorData = await response.json().catch(() => ({}))
+      console.error('Airtable error response:', errorData)
+      throw new Error(`Submission failed: ${response.status}`)
     }
 
-    submitMessage.value = 'Thanks! We’ll keep you informed.'
-    // Reset form would go here if needed
+    const result = await response.json()
+    console.log('Success:', result)
+    submitMessage.value = "Thanks! We'll keep you informed."
   } catch (error) {
     console.error('Form submission error:', error)
     submitMessage.value = 'Something went wrong. Please try again.'

@@ -9,8 +9,8 @@ import { Icon } from 'astro-icon/components';
 
   <main>
 
-    <header class="bg-p4a-bg0 mb-10">
-      <div class="container py-16 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <header class="bg-p4a-bg0 relative">
+      <div class="container pt-16 md:pt-12 pb-28 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h1 class="text-4xl lg:text-6xl text-p4a-bg4 font-bold leading-18">
             Connecting people to ideas — and ideas to <span class="text-white">real results</span>.
@@ -23,17 +23,20 @@ import { Icon } from 'astro-icon/components';
           <SharePerspective />
         </div>
       </div>
+      <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height: 60px;">
+        <path fill="#d4defc" d="M0,32 C240,60 480,60 720,32 C960,4 1200,4 1440,32 L1440,60 L0,60 Z"></path>
+      </svg>
     </header>
     
-    <div class="mb-12 text-center">
-      <div class="inline-block py-4 px-8 border border-p4a-b2 shadow-xl rounded-4xl">
+    <div class="mb-12 mt-6 text-center">
+      <div class="inline-block py-4 px-8 bg-white/30 border border-p4a-bg2 shadow-md rounded-4xl">
         <p class="text-p4a-bg4 text-sm">Don't miss background information on the <a class="hover:text-p4a-bg4 underline decoration-2" href="/about">About</a> page.</p>
       </div>
     </div>
     
     <div class="container pb-8">
 
-      <section class="max-w-3xl mx-auto mb-14 text-p4a-bg1">
+      <section class="max-w-4xl mx-auto mb-18 text-p4a-bg1">
         <h2 class="text-4xl font-bold mb-2">How it works</h2>
         <p class="leading-relaxed mb-4">Free access for all Americans, launching in 2026.</p>
         <div class="flex flex-row gap-2 mb-4 items-start">
@@ -76,7 +79,7 @@ import { Icon } from 'astro-icon/components';
         </div>
       </section>
 
-      <section class="max-w-3xl mx-auto mb-14 text-p4a-bg1">
+      <section class="max-w-4xl mx-auto mb-18 text-p4a-bg1">
         <h2 class="text-4xl font-bold mb-2">Why it matters</h2>
         <div class="flex flex-row gap-2 items-center text-p4a-bg2">
           <Icon class="text-4xl" name="ph:megaphone" />
@@ -101,7 +104,7 @@ import { Icon } from 'astro-icon/components';
         </p>
       </section>
 
-      <section class="max-w-3xl mx-auto text-p4a-bg1">
+      <section class="max-w-4xl mx-auto text-p4a-bg1">
         <h2 class="text-4xl font-bold mb-4">Get involved</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="p-6 rounded-md shadow-lg bg-p4a-body border border-p4a-bg2 flex flex-col">
