@@ -5,8 +5,9 @@ A simple, static website built with Astro and Tailwind CSS for the Playbook for 
 ## Tech Stack
 
 - Astro - Static site framework
-- Tailwind CSS - Utility-first CSS framework
-- Google Fonts - Jost font family (light, regular, semibold, bold, extrabold)
+- FormKit - Vue 3 form library
+- Tailwind v4 - Utility-first CSS framework
+- Google Fonts - Jost sans-serif and Libertinus Serif serif font families
 
 ## Setup
 
