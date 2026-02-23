@@ -20,6 +20,17 @@ const { title } = Astro.props;
       rel="stylesheet"
     />
     <title>{title}</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXYGWT06LV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PXYGWT06LV');
+    </script>
+
   </head>
   <body class="bg-p4a-body0 text-black font-sans min-h-screen flex flex-col">
     <header class="bg-p4a-bg0 text-white">
