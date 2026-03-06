@@ -160,11 +160,18 @@ const submitForm = async (formData: any) => {
             label="Tell us about yourself"
             validation="required"
             rows="4"
+            :classes="{
+              outer: 'mb-8',
+              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
+              legend: 'px-2 font-semibold text-gray-900',
+              inner: 'mt-1',
+              input: 'py-2'
+            }"
           />
 
           <!-- Weekly Availability -->
-          <div class="mb-8">
-            <h3 class="text-xl font-semibold mb-2">Weekly availability</h3>
+          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
+            <legend class="px-2 font-semibold text-gray-900">Weekly availability</legend>
             <p class="text-sm mb-4">How much time can you realistically contribute per week?</p>
 
             <div class="space-y-2">
@@ -180,7 +187,7 @@ const submitForm = async (formData: any) => {
                 <span class="text-gray-900">{{ option.label }}</span>
               </label>
             </div>
-          </div>
+          </fieldset>
 
           <!-- Hidden field to capture availability in FormKit structure -->
           <FormKit type="hidden" name="availability" v-model="availability" />
@@ -193,8 +200,8 @@ const submitForm = async (formData: any) => {
           <FormKit type="hidden" name="strengths" v-model="strengthsString" />
 
           <!-- Contribution -->
-          <div class="mb-12">
-            <h3 class="text-xl font-semibold mb-2">Tell us what you like to do</h3>
+          <fieldset class="mb-12 p-4 border border-p4a-bg2 rounded-lg">
+            <legend class="px-2 font-semibold text-xl">Tell us what you like to do</legend>
             <p class="text-sm mb-1">Choose your 1st favorite skill and optionally choose your 2nd favorite skill</p>
             <p class="text-sm italic text-gray-500 mb-4">Most people are flexible in at least one other area.</p>
 
@@ -241,11 +248,11 @@ const submitForm = async (formData: any) => {
                 </button>
               </div>
             </div>
-          </div>
+          </fieldset>
 
           <!-- Strengths -->
-          <div class="mb-8">
-            <h3 class="text-xl font-semibold mb-2">Tell us your strengths</h3>
+          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
+            <legend class="px-2 font-semibold text-xl">Tell us your strengths</legend>
             <p class="text-sm mb-4">Select up to 5 strengths that describe how you naturally show up</p>
 
             <div class="flex flex-wrap gap-2 mb-3">
@@ -267,7 +274,7 @@ const submitForm = async (formData: any) => {
             </div>
 
             <p class="text-sm">Selected: {{ strengthsCount }}</p>
-          </div>
+          </fieldset>
         </FormKit>
 
         <FormKit type="step" name="finish" label="Finish">
@@ -277,6 +284,13 @@ const submitForm = async (formData: any) => {
             name="name"
             label="Full Name"
             validation="required"
+            :classes="{
+              outer: 'mb-8',
+              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
+              legend: 'px-2 font-semibold text-gray-900',
+              inner: 'mt-1',
+              input: 'py-2'
+            }"
           />
 
           <!-- Email -->
@@ -285,6 +299,13 @@ const submitForm = async (formData: any) => {
             name="email"
             label="Email Address"
             validation="required|email"
+            :classes="{
+              outer: 'mb-8',
+              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
+              legend: 'px-2 font-semibold text-gray-900',
+              inner: 'mt-1',
+              input: 'py-2'
+            }"
           />
 
           <template #stepNext>

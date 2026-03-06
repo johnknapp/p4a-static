@@ -27,6 +27,16 @@ export default defaultConfig({
         input: 'mr-2 w-5 h-5 text-blue-600',
         label: 'text-gray-900',
       },
+      checkbox: {
+        outer: 'mb-3',
+        fieldset: 'border-0 p-0 m-0',
+        wrapper: 'flex flex-col space-y-2',
+        legend: 'block mb-3 font-semibold text-gray-900',
+        options: 'flex flex-col space-y-2',
+        option: 'flex items-center',
+        input: 'mr-3 w-5 h-5 text-blue-600',
+        label: 'text-gray-900',
+      },
       submit: {
         input: 'bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg cursor-pointer transition-colors w-full',
       },
