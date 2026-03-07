@@ -5,9 +5,29 @@ A simple, static website built with Astro and Tailwind CSS for the Playbook for 
 ## Tech Stack
 
 - Astro - Static site framework
-- FormKit - Vue 3 form library
+- FormKit - Vue 3 form library with multi-step forms
 - Tailwind v4 - Utility-first CSS framework
 - Google Fonts - Jost sans-serif and Libertinus Serif serif font families
+
+## Report Intake Form
+
+The site includes a public 4-step anonymous report intake form (`/file-a-report`) that submits to the Python backend:
+
+- **Step 1:** The Problem (what, where, category, who's affected)
+- **Step 2:** Context (scope, institution, timing, pattern)
+- **Step 3:** Details (observations, why it matters, supporting links)
+- **Step 4:** Privacy & Submit (confirmations, optional follow-up email)
+
+Form submissions POST to the FastAPI backend at `PUBLIC_REPORT_ENDPOINT_URL` (configured in `.env`).
+
+### Environment Variables
+
+Create a `.env` file with:
+```
+PUBLIC_REPORT_ENDPOINT_URL='http://localhost:8000/report'
+```
+
+The form creates anonymous report submissions that staff can review and process.
 
 ## Setup
 

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ReportIntake from '../components/ReportIntake.vue';
+---
+
+<Layout title="File a report – Playbook for America">
+  <main>
+    <div class="container pt-24">
+
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-14">
+          <h1 class="mb-3 text-4xl text-p4a-bg1 font-bold">File a Report</h1>
+          <p class="text-xl max-w-prose text-p4a-bg0 leading-relaxed tracking-wider">
+            Describe a civic problem, add any helpful context, and submit it for review. Reports are evaluated before they may advance into Issues, ideas, and ultimately actionable Playbooks.
+          </p>
+        </header>
+
+        <section class="mb-14">
+          <div class="max-w-2xl mx-auto">
+            <ReportIntake client:load />
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</Layout>
