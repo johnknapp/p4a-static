@@ -149,7 +149,7 @@ const submitForm = async (formData: any) => {
     >
       <FormKit
         type="multi-step"
-        :allow-incomplete="true"
+        :allow-incomplete="false"
         tab-style="progress"
       >
         <p class="text-sm mb-6 text-center text-gray-600">All entries are required unless marked optional</p>
@@ -164,7 +164,7 @@ const submitForm = async (formData: any) => {
                   type="radio"
                   name="role"
                   :value="option"
-                  v-model="role"
+                  v-model="role"                  
                   @change="roleOther = (option === 'Other')"
                   class="w-5 h-5 mr-3 text-blue-600"
                   required
@@ -188,7 +188,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Hidden field to capture role in FormKit structure -->
-          <FormKit type="hidden" name="role" v-model="role" />
+          <FormKit type="hidden" name="role" v-model="role" validation="required" />
         </FormKit>
 
         <!-- Step 2: Your perspective -->
@@ -217,7 +217,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Hidden field to capture engagementLevel in FormKit structure -->
-          <FormKit type="hidden" name="engagementLevel" v-model="engagementLevel" />
+          <FormKit type="hidden" name="engagementLevel" v-model="engagementLevel" validation="required" />
 
           <!-- Current Effectiveness -->
           <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
@@ -243,7 +243,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Hidden field to capture currentEffectiveness in FormKit structure -->
-          <FormKit type="hidden" name="currentEffectiveness" v-model="currentEffectiveness" />
+          <FormKit type="hidden" name="currentEffectiveness" v-model="currentEffectiveness" validation="required" />
 
           <!-- Compelling Score -->
           <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
@@ -269,7 +269,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Hidden field to capture compellingScore in FormKit structure -->
-          <FormKit type="hidden" name="compellingScore" v-model="compellingScore" />
+          <FormKit type="hidden" name="compellingScore" v-model="compellingScore" validation="required" />
 
           <!-- What Makes Compelling -->
           <FormKit
@@ -314,7 +314,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Hidden field to capture likelihoodToEngage in FormKit structure -->
-          <FormKit type="hidden" name="likelihoodToEngage" v-model="likelihoodToEngage" />
+          <FormKit type="hidden" name="likelihoodToEngage" v-model="likelihoodToEngage" validation="required" />
 
           <!-- How Would Engage -->
           <FormKit
@@ -369,7 +369,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Hidden field to capture mainConcerns in FormKit structure -->
-          <FormKit type="hidden" name="mainConcerns" v-model="mainConcerns" />
+          <FormKit type="hidden" name="mainConcerns" v-model="mainConcerns" validation="required" />
         </FormKit>
 
         <!-- Step 4: Final thoughts -->
@@ -392,7 +392,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Hidden field to capture worthPursuing in FormKit structure -->
-          <FormKit type="hidden" name="worthPursuing" v-model="worthPursuing" />
+          <FormKit type="hidden" name="worthPursuing" v-model="worthPursuing" validation="required" />
 
           <FormKit
             type="textarea"
