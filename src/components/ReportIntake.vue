@@ -69,13 +69,13 @@ const submitForm = async (formData: any) => {
     console.log('  supporting_links:', stepData.details?.supporting_links)
     console.log('  other_notes:', stepData.details?.other_notes)
 
-    console.log('Step 4 - Privacy & Submit:')
-    console.log('  is_emergency_confirm:', stepData.privacy_and_submit?.is_emergency_confirm)
-    console.log('  good_faith_confirm:', stepData.privacy_and_submit?.good_faith_confirm)
-    console.log('  followup_mode:', stepData.privacy_and_submit?.followup_mode)
-    console.log('  followup_email:', stepData.privacy_and_submit?.followup_email)
-    console.log('  consent_contact:', stepData.privacy_and_submit?.consent_contact)
-    console.log('  privacy_ack:', stepData.privacy_and_submit?.privacy_ack)
+    console.log('Step 4 - Privacy & review:')
+    console.log('  is_emergency_confirm:', stepData.privacy_and_review?.is_emergency_confirm)
+    console.log('  good_faith_confirm:', stepData.privacy_and_review?.good_faith_confirm)
+    console.log('  followup_mode:', stepData.privacy_and_review?.followup_mode)
+    console.log('  followup_email:', stepData.privacy_and_review?.followup_email)
+    console.log('  consent_contact:', stepData.privacy_and_review?.consent_contact)
+    console.log('  privacy_ack:', stepData.privacy_and_review?.privacy_ack)
 
     // Build payload for remote endpoint (flat structure matching backend schema)
     const payload = {
@@ -94,13 +94,13 @@ const submitForm = async (formData: any) => {
       why_it_matters_text: stepData.details?.why_it_matters_text || null,
       supporting_links: stepData.details?.supporting_links || null,
       other_notes: stepData.details?.other_notes || null,
-      // Step 4: Privacy & Submit
-      is_emergency_confirm: stepData.privacy_and_submit?.is_emergency_confirm || [],
-      good_faith_confirm: stepData.privacy_and_submit?.good_faith_confirm || [],
-      privacy_ack: stepData.privacy_and_submit?.privacy_ack || [],
-      followup_mode: stepData.privacy_and_submit?.followup_mode || '',
-      followup_email: stepData.privacy_and_submit?.followup_email || null,
-      consent_contact: stepData.privacy_and_submit?.consent_contact || null
+      // Step 4: Privacy & review
+      is_emergency_confirm: stepData.privacy_and_review?.is_emergency_confirm || [],
+      good_faith_confirm: stepData.privacy_and_review?.good_faith_confirm || [],
+      privacy_ack: stepData.privacy_and_review?.privacy_ack || [],
+      followup_mode: stepData.privacy_and_review?.followup_mode || '',
+      followup_email: stepData.privacy_and_review?.followup_email || null,
+      consent_contact: stepData.privacy_and_review?.consent_contact || null
     }
 
     console.log('Structured Payload:', payload)
@@ -159,7 +159,7 @@ const submitForm = async (formData: any) => {
         :allow-incomplete="true"
         tab-style="progress"
       >
-        <p class="text-sm mb-6 text-center text-gray-600">All entries required unless marked optional</p>
+        <p class="text-sm mb-6 text-center text-gray-600">Required unless marked optional</p>
         <!-- Step 1: The Problem -->
         <FormKit type="step" name="the_problem" label="The Problem">
           <FormKit
@@ -171,7 +171,7 @@ const submitForm = async (formData: any) => {
               required: 'Please describe the problem.',
               length: 'Please provide between 50 and 500 characters.'
             }"
-            placeholder="Summarize the problem you are reporting."
+            placeholder="Briefly describe what is happening and why it concerns you"
             rows="4"
             :classes="{
               outer: 'mb-6',
@@ -187,7 +187,7 @@ const submitForm = async (formData: any) => {
             name="location_scope_text"
             label="Where is this happening?"
             help="City, state, institution, community, industry, or national"
-            placeholder="Be as precise as you can"
+            placeholder="City, state, institution, community, industry, or national"
             validation="required|length:3,100"
             :validation-messages="{
               required: 'Please specify where this is happening.',
@@ -408,8 +408,8 @@ const submitForm = async (formData: any) => {
           />
         </FormKit>
 
-        <!-- Step 4: Privacy & submit -->
-        <FormKit type="step" name="privacy_and_submit" label="Privacy & submit">
+        <!-- Step 4: Privacy & review -->
+        <FormKit type="step" name="privacy_and_submit" label="Privacy & review">
           <fieldset class="mb-6 p-4 border border-p4a-bg2 rounded-lg">
             <legend class="px-2 font-semibold text-gray-900">Acknowledgements</legend>
             <div class="space-y-2 mt-2">
@@ -531,7 +531,13 @@ const submitForm = async (formData: any) => {
             }"
           />
 
-          <p class="mb-2 text-right text-sm">Please review your responses before submitting</p>
+          <div class="w-full px-2 pt-2 pb-1 mb-6 bg-p4a-bg4">
+            <p class="mb-2 text-sm text-p4a-body">
+              You do not need legal language or a polished writeup. Just start with what you’ve seen.
+              Please submit only sincere, good-faith reports. Anonymous submissions are welcome, but not all reports will advance.
+              Please review your responses before submitting.
+            </p>
+          </div>
           <template #stepNext>
             <FormKit
               type="submit"

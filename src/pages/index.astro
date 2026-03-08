@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ReportCivicProblem from '../components/ReportCivicProblem.astro';
 import SharePerspective from '../components/SharePerspective.astro';
 import StayInformedForm from '../components/StayInformedForm.vue';
 import { Icon } from 'astro-icon/components';
@@ -17,10 +18,10 @@ import { Icon } from 'astro-icon/components';
           </h1>
         </div>
         <div class="flex flex-col gap-6">
-          <h2 class="text-xl lg:text-2xl text-white font-semibold leading-10 lg:leading-14 tracking-wide">
+          <h2 class="pb-4 text-xl lg:text-2xl text-white font-semibold leading-10 lg:leading-14 tracking-wide">
             Playbook for America is a nonpartisan platform that turns crowdsourced ideas into execution-ready Playbooks — ready to turn confident action into measurable results.
           </h2>
-          <SharePerspective />
+          <ReportCivicProblem />
         </div>
       </div>
       <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height: 60px;">
