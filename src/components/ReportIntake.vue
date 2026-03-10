@@ -54,7 +54,7 @@ const submitForm = async (formData: any) => {
     console.log('Step 1 - The Problem:')
     console.log('  problem_text:', stepData.the_problem?.problem_text)
     console.log('  location_scope_text:', stepData.the_problem?.location_scope_text)
-    console.log('  category:', stepData.the_problem?.category)
+    console.log('  category_focus_area:', stepData.the_problem?.category)
     console.log('  affected_parties_text:', stepData.the_problem?.affected_parties_text)
 
     console.log('Step 2 - Context:')
@@ -82,7 +82,7 @@ const submitForm = async (formData: any) => {
       // Step 1: The Problem
       problem_text: stepData.the_problem?.problem_text || '',
       location_scope_text: stepData.the_problem?.location_scope_text || '',
-      category: stepData.the_problem?.category || '',
+      category_focus_area: stepData.the_problem?.category || '',
       affected_parties_text: stepData.the_problem?.affected_parties_text || null,
       // Step 2: Context
       problem_scope: stepData.context?.problem_scope || '',
@@ -107,6 +107,7 @@ const submitForm = async (formData: any) => {
     console.log('Payload as JSON:', JSON.stringify(payload, null, 2))
 
     const endpointUrl = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL
+    const apiKey = import.meta.env.PUBLIC_P4A_API_KEY
 
     console.log('Posting to:', endpointUrl)
 
@@ -114,6 +115,7 @@ const submitForm = async (formData: any) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-api-key': apiKey
       },
       body: JSON.stringify(payload)
     })
@@ -221,9 +223,9 @@ const submitForm = async (formData: any) => {
           <FormKit
             type="text"
             name="affected_parties_text"
-            label="Who is most affected?"
+            label="What category of society is most affected?"
             help="Optional"
-            placeholder="Types of citizens"
+            placeholder="Describe citizens most impacted"
             validation="length:0,150"
             :validation-messages="{
               length: 'Please limit to 150 characters or less.'
@@ -409,7 +411,7 @@ const submitForm = async (formData: any) => {
         </FormKit>
 
         <!-- Step 4: Privacy & review -->
-        <FormKit type="step" name="privacy_and_submit" label="Privacy & review">
+        <FormKit type="step" name="privacy_and_review" label="Privacy & review">
           <fieldset class="mb-6 p-4 border border-p4a-bg2 rounded-lg">
             <legend class="px-2 font-semibold text-gray-900">Acknowledgements</legend>
             <div class="space-y-2 mt-2">
