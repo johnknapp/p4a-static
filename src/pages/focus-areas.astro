@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+const apiBase = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL.replace('/report', '');
+---
+
+<Layout title="P4A Focus areas">
+  <main>
+    <div class="container pt-24">
+      <div class="">
+        <header class="mb-8">
+          <h1 class="mb-3 text-4xl text-p4a-bg1 font-bold">Current focus areas</h1>
+          <p class="text-xl text-p4a-bg0 leading-relaxed tracking-wider mb-12">
+            Playbook for America organizes Issues, Ideas, and Playbooks into focus areas.
+            These focus areas make it easier for our useers to find what matters and choose their favorites
+            to personalize their experiences and stay on top of the issues that matter most to them.
+          </p>
+        </header>
+
+        <div id="focus-areas-loading" class="text-p4a-bg1">Loading...</div>
+        <div id="focus-areas-error" class="hidden text-red-600"></div>
+        <div id="focus-areas-content"></div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script is:inline define:vars={{ apiBase }}>
+  async function loadFocusAreas() {
+    const loading = document.getElementById('focus-areas-loading');
+    const error = document.getElementById('focus-areas-error');
+    const content = document.getElementById('focus-areas-content');
+
+    try {
+      const res = await fetch(`${apiBase}/focus-areas/categories`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const categories = await res.json();
+
+      loading.classList.add('hidden');
+
+      content.innerHTML = categories.map((cat) => `
+        <section class="mb-10">
+          <h2 class="text-xl font-bold text-p4a-bg1">${cat.name}</h2>
+          <p class="mb-4">${cat.description}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${cat.focus_areas.map((area) => `
+              <div class="bg-p4a-body rounded-lg shadow-lg p-4 border border-p4a-bg3">
+                <div class="text-lg font-semibold text-p4a-bg3">${area.name}</div>
+                <div>${area.description}</div>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `).join('');
+    } catch (err) {
+      loading.classList.add('hidden');
+      error.classList.remove('hidden');
+      error.textContent = `Failed to load focus areas: ${err.message}`;
+    }
+  }
+
+  loadFocusAreas();
+</script>
