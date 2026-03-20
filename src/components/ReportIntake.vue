@@ -58,10 +58,8 @@ const submitForm = async (formData: any) => {
     console.log('  affected_parties_text:', stepData.the_problem?.affected_parties_text)
 
     console.log('Step 2 - Context:')
-    console.log('  problem_scope:', stepData.context?.problem_scope)
-    console.log('  institution_text:', stepData.context?.institution_text)
+    console.log('  responsible_party:', stepData.context?.responsible_party)
     console.log('  occurred_time_text:', stepData.context?.occurred_time_text)
-    console.log('  repeat_pattern:', stepData.context?.repeat_pattern)
 
     console.log('Step 3 - Details:')
     console.log('  observations_text:', stepData.details?.observations_text)
@@ -85,10 +83,8 @@ const submitForm = async (formData: any) => {
       category_focus_area: stepData.the_problem?.category || '',
       affected_parties_text: stepData.the_problem?.affected_parties_text || null,
       // Step 2: Context
-      problem_scope: stepData.context?.problem_scope || '',
-      institution_text: stepData.context?.institution_text || null,
+      responsible_party: stepData.context?.responsible_party || null,
       occurred_time_text: stepData.context?.occurred_time_text || '',
-      repeat_pattern: stepData.context?.repeat_pattern || '',
       // Step 3: Details
       observations_text: stepData.details?.observations_text || null,
       why_it_matters_text: stepData.details?.why_it_matters_text || null,
@@ -243,32 +239,8 @@ const submitForm = async (formData: any) => {
         <!-- Step 2: Context -->
         <FormKit type="step" name="context" label="Context">
           <FormKit
-            type="radio"
-            name="problem_scope"
-            label="Is this mainly..."
-            :options="[
-              'A public or civic problem',
-              'A problem inside an institution or system',
-              'A personal experience that may reflect a broader problem',
-              'Not sure'
-            ]"
-            validation="required"
-            :classes="{
-              outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
-              wrapper: 'space-y-2 flex flex-col',
-              options: 'space-y-2',
-              option: 'flex items-center',
-              inner: '$reset inline',
-              input: '$reset w-5 h-5 mr-3',
-              label: 'inline'
-            }"
-          />
-
-          <FormKit
             type="text"
-            name="institution_text"
+            name="responsible_party"
             label="What organization, institution, or system is involved?"
             placeholder="The responsible party"
             help="Optional"
@@ -306,28 +278,6 @@ const submitForm = async (formData: any) => {
             }"
           />
 
-          <FormKit
-            type="radio"
-            name="repeat_pattern"
-            label="Does this seem like a one-time event or a pattern?"
-            :options="[
-              'One-time event',
-              'Repeated pattern',
-              'Not sure'
-            ]"
-            validation="required"
-            :classes="{
-              outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
-              wrapper: 'space-y-2 flex flex-col',
-              options: 'space-y-2',
-              option: 'flex items-center',
-              inner: '$reset inline',
-              input: '$reset w-5 h-5 mr-3',
-              label: 'inline'
-            }"
-          />
         </FormKit>
 
         <!-- Step 3: Details -->
@@ -341,7 +291,7 @@ const submitForm = async (formData: any) => {
             :validation-messages="{
               length: 'Please limit to 1000 characters or less.'
             }"
-            rows="4"
+            rows="3"
             :classes="{
               outer: 'mb-6',
               fieldset: 'border border-p4a-bg2 rounded-lg p-4',
@@ -360,7 +310,7 @@ const submitForm = async (formData: any) => {
             :validation-messages="{
               length: 'Please limit to 750 characters or less.'
             }"
-            rows="4"
+            rows="3"
             :classes="{
               outer: 'mb-6',
               fieldset: 'border border-p4a-bg2 rounded-lg p-4',
@@ -399,7 +349,7 @@ const submitForm = async (formData: any) => {
             :validation-messages="{
               length: 'Please limit to 1000 characters or less.'
             }"
-            rows="4"
+            rows="3"
             :classes="{
               outer: 'mb-6',
               fieldset: 'border border-p4a-bg2 rounded-lg p-4',
@@ -488,10 +438,11 @@ const submitForm = async (formData: any) => {
                   v-model="followupMode"
                   class="w-5 h-5 mr-3"
                   required
-                />
-                <span class="text-gray-900">{{ option }}</span>
-              </label>
-            </div>
+                  />
+                  <span class="text-gray-900">{{ option }}</span>
+                </label>
+              </div>
+              <p class="text-sm mt-2d text-center text-p4a-bg2">We will use your email to create a free account for you.</p>
           </fieldset>
 
           <!-- Hidden field to capture followupMode in FormKit structure -->
