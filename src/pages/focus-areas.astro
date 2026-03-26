@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import appHomepage from '../assets/app_homepage_2026-03-25.png';
 const apiBase = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL.replace('/report', '');
 ---
 
@@ -7,16 +8,34 @@ const apiBase = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL.replace('/report', ''
   <main>
     <div class="container pt-24">
       <div class="">
-        <header class="mb-8">
+        <header class="mb-12">
           <h1 class="mb-3 text-4xl text-p4a-bg1 font-bold">Focus areas</h1>
-          <p class="text-xl text-p4a-bg0 leading-relaxed tracking-wider mb-12">
-            Playbook for America organizes Issues, Ideas, and Playbooks into focus areas.
-            These focus areas make it easier for our users to find what matters and personalize 
-            their experiences to stay on top of the issues that matter most to them.
+          <p class="text-xl text-p4a-bg0 leading-relaxed tracking-wider mb-4">
+            Playbook for America organizes public problems and solutions into 18 focus areas across Government, Communities, and Economy.
           </p>
         </header>
 
-        <div id="focus-areas-loading" class="text-p4a-bg1">Loading...</div>
+        <div>
+          <div class="font-bold text-p4a-bg2 text-2xl mb-4">
+            Topic Watch helps you follow the topics you care about most
+          </div>
+          <div class="flex flex-col items-center mb-12">
+            <img src={appHomepage.src} alt="Playbook for America app homepage" class="rounded-lg border border-p4a-bg3 shadow-lg max-w-xl" />
+            <p class="text-center mt-1">
+              Choose up to three focus areas to create your personal Topic Watch<br />and keep the latest and trending content close at hand.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="font-bold text-p4a-bg2 text-2xl">
+          Explore all 18 focus areas
+        </div>
+        <p class="mb-8">
+          Together, these focus areas shape how Playbook for America organizes the issues, ideas, and Playbooks our members care about most.
+        </p>
+
+          <div id="focus-areas-loading" class="text-p4a-bg1">Loading...</div>
         <div id="focus-areas-error" class="hidden text-red-600"></div>
         <div id="focus-areas-content"></div>
       </div>
@@ -39,7 +58,7 @@ const apiBase = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL.replace('/report', ''
 
       content.innerHTML = categories.map((cat) => `
         <section class="mb-10">
-          <h2 class="text-xl font-bold text-p4a-bg1">${cat.name}</h2>
+          <h2 class="text-lg font-bold text-p4a-bg1">${cat.name}</h2>
           <p class="mb-4">${cat.description}</p>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             ${cat.focus_areas.map((area) => `

@@ -37,9 +37,9 @@ const { title } = Astro.props;
   <body class="bg-p4a-body0 text-black font-sans min-h-screen flex flex-col">
     <header class="bg-p4a-bg0 text-white">
       <div class="container h-18 flex items-center justify-between">
-        <div class="md:text-lg font-semibold"><a href="https://playbookforamerica.org" class="hover:underline hover:decoration-2">The Playbook for America</a></div>
+        <div class="md:text-lg font-semibold"><a href={import.meta.env.PUBLIC_ASTRO_URL} class="hover:underline hover:decoration-2">The Playbook for America</a></div>
         <nav class="flex items-center gap-8">
-          <a href="https://app.playbookforamerica.org/start-signup" class="text-sm md:text-base bg-p4a-bg4 text-white font-semibold px-4 py-1.5 rounded-full hover:bg-p4a-bg3 transition-colors">Free to join</a>
+          <a href="https://app.playbookforamerica.org/start-signup" class="text-lg bg-p4a-bg4 text-white font-bold px-6 py-3 rounded-full hover:bg-p4a-bg3 transition-colors">Free to join</a>
           <a href="https://app.playbookforamerica.org/signin" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Signin</a>
           <a href="/file-a-report" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">File a report</a>
           <!-- <a href="/focus-areas" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Focus areas</a> -->

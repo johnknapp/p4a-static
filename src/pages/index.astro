@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ReportCivicProblem from '../components/ReportCivicProblem.astro';
+import JoinFreeAndContribute from '../components/JoinFreeAndContribute.astro';
 import SharePerspective from '../components/SharePerspective.astro';
 import StayInformedForm from '../components/StayInformedForm.vue';
 import { Icon } from 'astro-icon/components';
@@ -21,7 +21,7 @@ import { Icon } from 'astro-icon/components';
           <h2 class="pb-4 text-xl lg:text-2xl text-white font-semibold leading-10 lg:leading-14 tracking-wide">
             Playbook for America is a nonpartisan platform that turns crowdsourced ideas into execution-ready Playbooks — ready to turn confident action into measurable results.
           </h2>
-          <ReportCivicProblem />
+          <JoinFreeAndContribute />
         </div>
       </div>
       <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height: 60px;">
@@ -31,7 +31,7 @@ import { Icon } from 'astro-icon/components';
     
     <div class="mb-12 mt-6 text-center">
       <div class="mx-4 inline-block py-4 px-8 bg-white/70 border border-p4a-bg2 shadow-md rounded-4xl">
-        <p class="text-p4a-bg2 font-semibold"><a class="hover:text-p4a-bg4 underline hover:decoration-2" href="/about">Learn about Playbook for America</a></p>
+        <p class="text-p4a-bg2 font-semibold"><a class="hover:text-p4a-bg4 underline hover:decoration-2" href="/focus-areas">Explore our focus areas</a></p>
       </div>
       <div class="mx-4 inline-block py-4 px-8 bg-white/70 border border-p4a-bg2 shadow-md rounded-4xl">
         <p class="text-p4a-bg2 font-semibold"><a class="hover:text-p4a-bg4 underline hover:decoration-2" href="/volunteer">Volunteer to help build P4A</a></p>
@@ -41,26 +41,99 @@ import { Icon } from 'astro-icon/components';
     <div class="container pb-8">
 
       <section class="max-w-4xl mx-auto mb-18 text-p4a-bg1">
-        <h2 class="text-4xl font-bold mb-2">How it works</h2>
+        <h2 class="text-4xl font-bold mb-2">From Issue to impact</h2>
+        <p class="leading-relaxed mb-4">
+          <!-- Every contribution fits into a clear path forward. Issues define problems, Ideas propose solutions, and Playbooks turn promising ideas into action and outcomes. -->
+          Playbook for America is built around three connected building blocks. Issues define problems. Ideas propose solutions. 
+          Playbooks turn strong ideas into coordinated action and measurable outcomes.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-2">
+          <div class="bg-p4a-body rounded shadow-md border border-p4a-bg1">
+            <div class="bg-p4a-bg1 py-1 text-xl text-white text-center font-bold rounded-t">
+              <div class="justify-center flex items-center gap-2"><Icon name="ph:hand-palm" /> Issue</div>
+            </div>
+            <div class="p-3 text-sm sm:text-center">A clearly defined public problem that deserves attention, understanding, and action.</div>
+          </div>
+          <div class="flex items-center justify-center">
+            <Icon class="text-3xl text-p4a-bg2 hidden md:block" name="ph:arrow-right-bold" />
+            <Icon class="text-3xl text-p4a-bg2 md:hidden" name="ph:arrow-down-bold" />
+          </div>
+          <div class="bg-p4a-body rounded shadow-md border border-p4a-bg1">
+            <div class="bg-p4a-bg1 py-1 text-xl text-white text-center font-bold rounded-t">
+              <div class="justify-center flex items-center gap-2"><Icon name="ph:lightbulb" /> Idea</div>
+            </div>
+            <div class="p-3 text-sm sm:text-center">A proposed solution that responds to an Issue and can be discussed, improved, and strengthened.</div>
+          </div>
+          <div class="flex items-center justify-center">
+            <Icon class="text-3xl text-p4a-bg2 hidden md:block" name="ph:arrow-right-bold" />
+            <Icon class="text-3xl text-p4a-bg2 md:hidden" name="ph:arrow-down-bold" />
+          </div>
+          <div class="bg-p4a-body rounded shadow-md border border-p4a-bg1">
+            <div class="bg-p4a-bg1 py-1 text-xl text-white text-center font-bold rounded-t">
+              <div class="justify-center flex items-center gap-2"><Icon name="ph:book-open-text" /> Playbook</div>
+            </div>
+            <div class="p-3 text-sm sm:text-center">An execution-ready plan that turns strong Ideas into coordinated action, ownership, and measurable results.</div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="max-w-4xl mx-auto mb-18 text-p4a-bg1">
+        <h2 class="text-4xl font-bold mb-2">Being heard starts with being understood</h2>
+        <p class="leading-relaxed mb-2">
+          Most people can see problems and imagine better solutions. The hard part is expressing them clearly enough for others to understand and act on. 
+          <!-- Playbook for America expands simple inputs into clearer, structured ideas others quickly understand, strengthen, and build on. -->
+        </p>
+        <!-- <p class="font-semibold">Playbook for America makes sure you are understood:</p>
+        <ul class="list-decimal ml-8 mb-4">
+          <li>Simple inputs get your point across quickly and easily</li>
+          <li>Our AI expands them to clear outputs others quickly understand, strengthen, and build upon</li>
+        </ul> -->
+        <!-- <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="bg-p4a-body p-4 flex justify-center items-center text-center border border-p4a-bg2 rounded shadow-md">
+            Simple inputs get your point across.
+          </div>
+          <div class="bg-p4a-body p-4 flex justify-center items-center text-center border border-p4a-bg2 rounded shadow-md">
+            AI delivers clear outputs others quickly understand, strengthen, and build upon.
+          </div>
+        </div> -->
+        <p class="font-semibold text-lg text-p4a-bg2">Start with what you know:</p>
+        <p class="mb-4">
+          Share a civic problem you’ve seen, 
+          <a href="https://app.playbookforamerica.org/start-signup" class="font-semibold underline hover:decoration-2">join free</a>,
+          and submit it as an Issue in about 3 minutes. From there, Playbook for America AI expands it into something others can understand, strengthen, and build on.
+        </p>
+        <p class="font-semibold text-lg text-p4a-bg2">Then build with others:</p>
+        <p class="">
+          Now that you’re a member, you can collaborate with others to refine ideas, support better proposals, and help turn shared concerns into progress for the common good.
+        </p>
+      </section>
+
+      <section class="max-w-4xl mx-auto mb-18 text-p4a-bg1">
+        <h2 class="text-4xl font-bold mb-2">How Ideas turn into a better America</h2>
         <p class="leading-relaxed mb-4">
           <!-- Ideas evolve within a structured lifecycle — refinement into implementable Playbooks, followed by adoption, execution, and evaluation.
           Free access for all Americans, launching in 2026. -->
-          Ideas evolve within a structured lifecycle — refinement into implementable Playbooks, followed by adoption, execution, and evaluation. AI-assisted research and analysis help expand early ideas into clearer proposals that others can understand, challenge, and strengthen. Free access for all Americans, launching in 2026.
+          <!-- Ideas evolve within a structured lifecycle — refinement of Issues, into Ideas, into implementable Playbooks, followed by adoption, execution, and evaluation. AI-assisted research and analysis help expand early ideas into clearer proposals that others can understand, challenge, and strengthen. -->
+           Playbook for America helps move public problems from citizen input to stronger ideas, execution-ready Playbooks, followed by adoption, execution, and evaluation.
         </p>
         <div class="flex flex-row gap-2 mb-4 items-start">
           <div class="">
             <div class="flex flex-row gap-2 items-center">
               <Icon class="text-4xl text-p4a-bg4" name="ph:number-circle-one-fill" />
-              <div class="text-xl font-bold text-p4a-bg2">Crowdsource civic enhancement ideas</div>
+              <div class="text-xl font-bold text-p4a-bg2">Surface important public problems</div>
             </div>
             <div class="ml-10">
-              Anyone can submit, discuss, and strengthen ideas to address real public challenges. 
+              All Americans can report Issues deserving attention and action. These reports help define problems clearly enough for others to understand, discuss, and respond to.
+              <a class="underline hover:decoration-2" href="/file-a-report">Anonymous reporting is also supported</a>.
+              <!-- Anyone can submit, discuss, and strengthen ideas to address real public challenges. 
               The strongest ideas gain visibility through broad participation and constructive review.
               Whistle-blowers can even submit Reports without fear of exposure.
               We even accept 
               <a class="underline hover:underline hover:decoration-2" href="/file-a-report">anonymous reports of civic problems</a>
               deserving real action.
-              Your voice matters here.
+              Your voice matters here. -->
             </div>
           </div>
         </div>
@@ -69,11 +142,12 @@ import { Icon } from 'astro-icon/components';
           <div class="">
             <div class="flex flex-row gap-2 items-center">
               <Icon class="text-4xl text-p4a-bg4" name="ph:number-circle-two-fill" />
-              <div class="text-xl font-bold text-p4a-bg2">Refine ideas into implementable Playbooks</div>
+              <div class="text-xl font-bold text-p4a-bg2">Strengthen promising solutions</div>
             </div>
             <div class="ml-10">
               <!-- Strong ideas are shaped into into structured Playbooks with implentation phases, scope, requirements, risks, and success metrics—so an entity can decide, fund, and execute. -->
-              Strong ideas are shaped into structured Playbooks with implementation phases, scope, requirements, risks, and success metrics—so an entity can decide, fund, and execute. AI tools assist with research, identifying gaps, and expanding rough proposals into clearer implementation plans.
+              <!-- Strong ideas are shaped into structured Playbooks with implementation phases, scope, requirements, risks, and success metrics—so an entity can decide, fund, and execute. AI tools assist with research, identifying gaps, and expanding rough proposals into clearer implementation plans. -->
+               Community members can propose Ideas in response to Issues, then discuss, refine, and strengthen them together. The strongest Ideas become clearer, more actionable starting points for real-world progress.
             </div>
           </div>
         </div>
@@ -82,10 +156,11 @@ import { Icon } from 'astro-icon/components';
           <div class="">
             <div class="flex flex-row gap-2 items-center">
               <Icon class="text-4xl text-p4a-bg4" name="ph:number-circle-three-fill" />
-              <div class="text-xl font-bold text-p4a-bg2">Playbooks move into execution</div>
+              <div class="text-xl font-bold text-p4a-bg2">Turn strong ideas into Playbooks</div>
             </div>
             <div class="ml-10">
-              Public and private entities commit to Playbooks, assign ownership and resources, and move from plan to program with defined scope and measurable outcomes.
+              <!-- Public and private entities commit to Playbooks, assign ownership and resources, and move from plan to program with defined scope and measurable outcomes. -->
+               Promising Ideas can be developed into Playbooks with clear implementation phases, scope, requirements, risks, ownership, and success measures — making them easier for capable entities to evaluate, fund, and execute.
             </div>
           </div>
         </div>
@@ -94,10 +169,11 @@ import { Icon } from 'astro-icon/components';
           <div class="">
             <div class="flex flex-row gap-2 items-center">
               <Icon class="text-4xl text-p4a-bg4" name="ph:number-circle-four-fill" />
-              <div class="text-xl font-bold text-p4a-bg2">Execution assessment ensures continuous improvement</div>
+              <div class="text-xl font-bold text-p4a-bg2">Learn from execution and outcomes</div>
             </div>
             <div class="ml-10">
-              Results are tracked against Playbook projections, strengthening future Playbooks and improving outcomes over time.
+              <!-- Results are tracked against Playbook projections, strengthening future Playbooks and improving outcomes over time. -->
+               As Playbooks move into execution, outcomes can be tracked against expectations. What works can be built on, what falls short can be improved, and future Playbooks can benefit from what is learned.
             </div>
           </div>
         </div>
