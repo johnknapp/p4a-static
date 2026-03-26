@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import appHomepage from '../assets/app_homepage_2026-03-25.png';
 const apiBase = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL.replace('/report', '');
+const apiKey = import.meta.env.PUBLIC_HTTP_X_P4A_API_KEY;
 ---
 
 <Layout title="P4A Focus areas">
@@ -43,14 +44,16 @@ const apiBase = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL.replace('/report', ''
   </main>
 </Layout>
 
-<script is:inline define:vars={{ apiBase }}>
+<script is:inline define:vars={{ apiBase, apiKey }}>
   async function loadFocusAreas() {
     const loading = document.getElementById('focus-areas-loading');
     const error = document.getElementById('focus-areas-error');
     const content = document.getElementById('focus-areas-content');
 
     try {
-      const res = await fetch(`${apiBase}/focus-areas/categories`);
+      const res = await fetch(`${apiBase}/focus-areas/categories`, {
+        headers: { 'x-api-key': apiKey }
+      });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const categories = await res.json();
 
