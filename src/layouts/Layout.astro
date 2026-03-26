@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '@formkit/themes/genesis';
 import '@formkit/addons/css/multistep';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   title: string;
@@ -29,32 +30,137 @@ const { title } = Astro.props;
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-PXYGWT06LV');
     </script>
-
   </head>
+
   <body class="bg-p4a-body0 text-black font-sans min-h-screen flex flex-col">
+
+    <!-- ======================================================
+         HEADER
+         ====================================================== -->
     <header class="bg-p4a-bg0 text-white">
       <div class="container h-18 flex items-center justify-between">
-        <div class="md:text-lg font-semibold"><a href={import.meta.env.PUBLIC_ASTRO_URL} class="hover:underline hover:decoration-2">The Playbook for America</a></div>
-        <nav class="flex items-center gap-8">
-          <a href="https://app.playbookforamerica.org/start-signup" class="text-lg bg-p4a-bg4 text-white font-bold px-6 py-3 rounded-full hover:bg-p4a-bg3 transition-colors">Free to join</a>
+
+        <!-- Logo -->
+        <div class="md:text-lg font-semibold">
+          <a href={import.meta.env.PUBLIC_ASTRO_URL} class="hover:underline hover:decoration-2">
+            <span class="md:hidden">P4A</span>
+            <span class="hidden md:inline">The Playbook for America</span>
+          </a>
+        </div>
+
+        <!-- Right side -->
+        <div class="flex items-center gap-4 md:gap-6 lg:gap-8">
+          <a href="https://app.playbookforamerica.org/start-signup" class="text-base bg-p4a-bg4 text-white font-bold px-5 py-2.5 rounded-full hover:bg-p4a-bg3 transition-colors">Free to join</a>
           <a href="https://app.playbookforamerica.org/signin" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Signin</a>
           <a href="/file-a-report" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">File a report</a>
-          <!-- <a href="/focus-areas" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Focus areas</a> -->
-          <a href="/faq" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">FAQ</a>
-          <a href="/about" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">About</a>
           <a href="/volunteer" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Volunteer</a>
-          <!-- <a href="/feasability-survey" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Feedback</a> -->
-        </nav>
+          <!-- <a href="/feasability-survey" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Feasability survey</a> -->
+          <button
+            id="drawer-open"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="nav-drawer"
+            class="text-white hover:text-p4a-bg4 transition-colors"
+          >
+            <Icon name="ph:list-bold" class="text-3xl" />
+          </button>
+        </div>
+
       </div>
     </header>
+
+    <!-- ======================================================
+         DRAWER OVERLAY
+         ====================================================== -->
+    <div
+      id="drawer-overlay"
+      class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300"
+      aria-hidden="true"
+    ></div>
+
+    <!-- ======================================================
+         DRAWER PANEL
+         ====================================================== -->
+    <nav
+      id="nav-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site navigation"
+      class="fixed top-0 right-0 h-full w-72 bg-p4a-bg0 text-white z-50 flex flex-col shadow-2xl
+             translate-x-full transition-transform duration-300"
+    >
+      <!-- Drawer header -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">
+        <span class="font-semibold text-sm tracking-wide uppercase text-white/60">Menu</span>
+        <button
+          id="drawer-close"
+          aria-label="Close menu"
+          class="text-white/70 hover:text-white transition-colors"
+        >
+          <Icon name="ph:x" class="w-6 h-6" />
+        </button>
+      </div>
+
+      <!-- ====================================================
+           DRAWER NAV LINKS
+           Add, remove, or reorder <a> tags freely.
+           Add a <p> for section headings.
+           ==================================================== -->
+      <div class="flex flex-col px-4 py-6 gap-1">
+        <a href="/" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Home</a>
+        <a href="/about" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">About P4A</a>
+        <a href="/focus-areas" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Explore our focus areas</a>
+        <a href="/file-a-report" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">File a problem report</a>
+        <a href="/faq" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Frequently asked questions</a>
+        <a href="/volunteer" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Volunteer to help grow P4A</a>
+        <a href="/feasability-survey" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Complete the feasability survey</a>
+        <!-- <a href="/code-of-conduct" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Code of conduct</a> -->
+        <!-- <a href="/contact" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Contact</a> -->
+        <!-- <a href="/product/structure" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">How it works</a> -->
+      </div>
+    </nav>
+
+    <!-- ======================================================
+         PAGE CONTENT
+         ====================================================== -->
     <div class="flex-grow">
       <slot />
     </div>
-		<footer class="w-full mt-12 py-6 bg-p4a-bg flex items-center">
-			<p class="text-white mx-auto">&copy; The Playbook for America</p>
-		</footer>	
+
+    <footer class="w-full mt-12 py-6 bg-p4a-bg flex items-center">
+      <p class="text-white mx-auto">&copy; The Playbook for America</p>
+    </footer>
+
+    <!-- ======================================================
+         DRAWER SCRIPT
+         ====================================================== -->
+    <script is:inline>
+      const drawer   = document.getElementById('nav-drawer');
+      const overlay  = document.getElementById('drawer-overlay');
+      const openBtn  = document.getElementById('drawer-open');
+      const closeBtn = document.getElementById('drawer-close');
+
+      function openDrawer() {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        openBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+        openBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      overlay.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+    </script>
+
   </body>
 </html>
