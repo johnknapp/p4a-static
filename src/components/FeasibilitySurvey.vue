@@ -96,7 +96,7 @@ const submitForm = async (formData: any) => {
     // Get Airtable credentials from environment variables
     const baseId = import.meta.env.PUBLIC_AIRTABLE_FEASIBILITY_SURVEY_BASE_ID
     const tableName = import.meta.env.PUBLIC_AIRTABLE_FEASIBILITY_SURVEY_TABLE_NAME
-    const apiKey = import.meta.env.PUBLIC_AIRTABLE_API_ACCESS_KEY
+    const apiKey = import.meta.env.PUBLIC_AIRTABLE_API_ACCESS_KEY_Q226
 
     // Build Airtable API endpoint
     const airtableUrl = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`
