@@ -1,17 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import FeasibilitySurvey from '../components/FeasibilitySurvey.vue';
+import FeedbackSurvey from '../components/FeedbackSurvey.vue';
 import { Icon } from 'astro-icon/components';
 ---
 
-<Layout title="P4A Feasability Survey">
+<Layout title="Feedback on Playbook for America">
   <main>
     <div class="container pt-24">
       <div class="max-w-4xl mx-auto">
         <header class="mb-8">
-          <h1 class="mb-8 text-4xl text-p4a-bg1 font-bold">Playbook for America – Feasibility Survey</h1>
+          <h1 class="mb-8 text-4xl text-p4a-bg1 font-bold">Let us know what you think</h1>
           <p class="mb-2 leading-relaxed">
-            We are Investigating the desirability and viability of the Playbook for America (P4A) web platform.
+            We are interested in your feedback on Playbook for America (P4A).
           </p>
           <p class="mb-2 leading-relaxed">
             The Playbook for America (P4A) exists to bring together ideas and programs that improve government, strengthen democracy, and renew civic life in the United States.
@@ -22,7 +22,7 @@ import { Icon } from 'astro-icon/components';
         </header>
         
       <section class="max-w-4xl mx-auto mb-8 text-p4a-bg1">
-        <h2 class="text-4xl font-bold mb-2">This is how it works</h2>
+        <h2 class="text-4xl font-bold mb-2">Here is how it works</h2>
         <p class="leading-relaxed mb-4">
           <!-- Every contribution fits into a clear path forward. Issues define problems, Ideas propose solutions, and Playbooks turn promising ideas into action and outcomes. -->
           Playbook for America is built around three connected building blocks. Issues define problems. Ideas propose solutions. 
@@ -63,10 +63,10 @@ import { Icon } from 'astro-icon/components';
 
         <section class="mb-14">
           <p class="mb-2 leading-relaxed">
-            Please take a moment to complete the survey. It's anonymous unless you choose to share your email. (Other entries are required.)
+            Please take a moment to share your thoughts. It's anonymous unless you choose to share your email. (Other entries are required.)
           </p>
           <div class="max-w-2xl mx-auto">
-            <FeasibilitySurvey client:load />
+            <FeedbackSurvey client:load />
           </div>
         </section>
       </div>
