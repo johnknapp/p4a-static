@@ -45,18 +45,18 @@ const { title } = Astro.props;
         <!-- Logo -->
         <div class="md:text-lg font-semibold">
           <a href={import.meta.env.PUBLIC_ASTRO_URL} class="hover:underline hover:decoration-2">
-            <span class="md:hidden">P4A</span>
-            <span class="hidden md:inline">The Playbook for America</span>
+            <!-- <span class="md:hidden">P4A</span> -->
+            <span class="hiddenmd:inline">The Playbook for America</span>
           </a>
         </div>
 
         <!-- Right side -->
         <div class="flex items-center gap-4 md:gap-6 lg:gap-8">
-          <a href="https://app.playbookforamerica.org/start-signup" class="text-base bg-p4a-bg4 text-white font-bold px-5 py-2.5 rounded-full hover:bg-p4a-bg3 transition-colors">Free to join</a>
+          <a href="https://app.playbookforamerica.org/start-signup" class="text-base bg-p4a-bg4 text-white font-bold px-5 py-2.5 rounded-full hover:bg-p4a-bg3 transition-colors">Join free</a>
           <a href="https://app.playbookforamerica.org/signin" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Signin</a>
-          <a href="/report-injustice" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Report civic injustice</a>
-          <a href="/volunteer" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Volunteer</a>
-          <a href="/feedback" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Feedback</a>
+          <a href="/report-injustice" class="text-sm hidden md:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Report a civic problem</a>
+          <a href="/volunteer" class="text-sm hidden lg:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Volunteer</a>
+          <a href="/feedback" class="text-sm hidden lg:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Feedback</a>
           <button
             id="drawer-open"
             aria-label="Open menu"
@@ -110,12 +110,12 @@ const { title } = Astro.props;
            ==================================================== -->
       <div class="flex flex-col px-4 py-6 gap-1">
         <a href="/" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Home</a>
-        <a href="/about" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">About P4A</a>
-        <a href="/focus-areas" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Explore our focus areas</a>
-        <a href="/report-injustice" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Report civic injustice</a>
-        <a href="/faq" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Frequently asked questions</a>
+        <a href="/report-injustice" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Report a civic problem</a>
         <a href="/volunteer" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Volunteer to help grow P4A</a>
-        <a href="/feedback" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Feedback</a>
+        <a href="/feedback" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Provide feedback</a>
+        <a href="/about" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">About P4A</a>
+        <a href="/faq" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Frequently asked questions</a>
+        <a href="/focus-areas" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Explore our focus areas</a>
         <!-- <a href="/code-of-conduct" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Code of conduct</a> -->
         <!-- <a href="/contact" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Contact</a> -->
         <!-- <a href="/product/structure" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">How it works</a> -->
