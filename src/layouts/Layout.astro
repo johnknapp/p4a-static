@@ -79,6 +79,14 @@ const { title } = Astro.props;
           >
             <Icon name="ph:list-bold" class="text-3xl" />
           </button>
+          <button
+            id="nav-theme-toggle"
+            aria-label="Toggle dark mode"
+            class="text-white hover:text-p4a-accent transition-colors"
+          >
+            <Icon id="nav-theme-icon-sun" name="ph:sun-bold" class="text-2xl hidden" />
+            <Icon id="nav-theme-icon-moon" name="ph:moon-bold" class="text-2xl hidden" />
+          </button>
         </div>
 
       </div>
@@ -188,24 +196,32 @@ const { title } = Astro.props;
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
       // Theme toggle
-      const themeToggle = document.getElementById('theme-toggle');
-      const iconSun     = document.getElementById('theme-icon-sun');
-      const iconMoon    = document.getElementById('theme-icon-moon');
-      const themeLabel  = document.getElementById('theme-label');
+      const themeToggle    = document.getElementById('theme-toggle');
+      const iconSun        = document.getElementById('theme-icon-sun');
+      const iconMoon       = document.getElementById('theme-icon-moon');
+      const themeLabel     = document.getElementById('theme-label');
+      const navThemeToggle = document.getElementById('nav-theme-toggle');
+      const navIconSun     = document.getElementById('nav-theme-icon-sun');
+      const navIconMoon    = document.getElementById('nav-theme-icon-moon');
 
       function updateThemeUI() {
         const isDark = document.documentElement.classList.contains('dark');
         iconSun.classList.toggle('hidden', !isDark);
         iconMoon.classList.toggle('hidden', isDark);
         themeLabel.textContent = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        navIconSun.classList.toggle('hidden', !isDark);
+        navIconMoon.classList.toggle('hidden', isDark);
       }
 
-      themeToggle.addEventListener('click', function() {
+      function applyThemeToggle() {
         const isDark = document.documentElement.classList.toggle('dark');
         document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         updateThemeUI();
-      });
+      }
+
+      themeToggle.addEventListener('click', applyThemeToggle);
+      navThemeToggle.addEventListener('click', applyThemeToggle);
 
       updateThemeUI();
     </script>
