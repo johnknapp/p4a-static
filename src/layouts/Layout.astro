@@ -32,14 +32,27 @@ const { title } = Astro.props;
       gtag('js', new Date());
       gtag('config', 'G-PXYGWT06LV');
     </script>
+
+    <!-- Apply saved theme before first paint to avoid flash -->
+    <script is:inline>
+      (function() {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = saved === 'dark' || (!saved && prefersDark);
+        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
 
-  <body class="bg-p4a-body0 text-black font-sans min-h-screen flex flex-col">
+  <body class="bg-p4a-bg text-p4a-ink font-sans min-h-screen flex flex-col">
 
     <!-- ======================================================
          HEADER
          ====================================================== -->
-    <header class="bg-p4a-bg0 text-white">
+    <header class="bg-p4a-navy text-white">
       <div class="container h-18 flex items-center justify-between">
 
         <!-- Logo -->
@@ -52,7 +65,7 @@ const { title } = Astro.props;
 
         <!-- Right side -->
         <div class="flex items-center gap-4 md:gap-6 lg:gap-8">
-          <a href="https://app.playbookforamerica.org/start-signup" class="text-base bg-p4a-bg4 text-white font-bold px-5 py-2.5 rounded-full hover:bg-p4a-bg3 transition-colors">Join free</a>
+          <a href="https://app.playbookforamerica.org/start-signup" class="text-base bg-p4a-accent text-white font-bold px-5 py-2.5 rounded-full hover:bg-p4a-link transition-colors">Join free</a>
           <a href="https://app.playbookforamerica.org/signin" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Signin</a>
           <a href="/report-injustice" class="text-sm hidden md:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Report a civic problem</a>
           <a href="/volunteer" class="text-sm hidden lg:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Volunteer</a>
@@ -62,7 +75,7 @@ const { title } = Astro.props;
             aria-label="Open menu"
             aria-expanded="false"
             aria-controls="nav-drawer"
-            class="text-white hover:text-p4a-bg4 transition-colors"
+            class="text-white hover:text-p4a-accent transition-colors"
           >
             <Icon name="ph:list-bold" class="text-3xl" />
           </button>
@@ -88,7 +101,7 @@ const { title } = Astro.props;
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      class="fixed top-0 right-0 h-full w-72 bg-p4a-bg0 text-white z-50 flex flex-col shadow-2xl
+      class="fixed top-0 right-0 h-full w-72 bg-p4a-navy text-white z-50 flex flex-col shadow-2xl
              translate-x-full transition-transform duration-300"
     >
       <!-- Drawer header -->
@@ -108,7 +121,7 @@ const { title } = Astro.props;
            Add, remove, or reorder <a> tags freely.
            Add a <p> for section headings.
            ==================================================== -->
-      <div class="flex flex-col px-4 py-6 gap-1">
+      <div class="flex flex-col px-4 py-6 gap-1 flex-grow">
         <a href="/" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Home</a>
         <a href="/report-injustice" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Report a civic problem</a>
         <a href="/volunteer" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Volunteer to help grow P4A</a>
@@ -120,6 +133,19 @@ const { title } = Astro.props;
         <!-- <a href="/contact" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Contact</a> -->
         <!-- <a href="/product/structure" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">How it works</a> -->
       </div>
+
+      <!-- Dark mode toggle -->
+      <div class="px-6 py-5 border-t border-white/10">
+        <button
+          id="theme-toggle"
+          class="flex items-center gap-3 text-white/70 hover:text-white transition-colors w-full"
+          aria-label="Toggle dark mode"
+        >
+          <Icon id="theme-icon-sun" name="ph:sun-bold" class="text-xl hidden" />
+          <Icon id="theme-icon-moon" name="ph:moon-bold" class="text-xl hidden" />
+          <span id="theme-label" class="text-sm font-medium"></span>
+        </button>
+      </div>
     </nav>
 
     <!-- ======================================================
@@ -129,12 +155,12 @@ const { title } = Astro.props;
       <slot />
     </div>
 
-    <footer class="w-full mt-12 py-6 bg-p4a-bg flex items-center">
+    <footer class="w-full mt-12 py-6 bg-p4a-navy flex items-center">
       <p class="text-white mx-auto">&copy; The Playbook for America</p>
     </footer>
 
     <!-- ======================================================
-         DRAWER SCRIPT
+         DRAWER + THEME SCRIPT
          ====================================================== -->
     <script is:inline>
       const drawer   = document.getElementById('nav-drawer');
@@ -160,6 +186,28 @@ const { title } = Astro.props;
       closeBtn.addEventListener('click', closeDrawer);
       overlay.addEventListener('click', closeDrawer);
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+      // Theme toggle
+      const themeToggle = document.getElementById('theme-toggle');
+      const iconSun     = document.getElementById('theme-icon-sun');
+      const iconMoon    = document.getElementById('theme-icon-moon');
+      const themeLabel  = document.getElementById('theme-label');
+
+      function updateThemeUI() {
+        const isDark = document.documentElement.classList.contains('dark');
+        iconSun.classList.toggle('hidden', !isDark);
+        iconMoon.classList.toggle('hidden', isDark);
+        themeLabel.textContent = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+      }
+
+      themeToggle.addEventListener('click', function() {
+        const isDark = document.documentElement.classList.toggle('dark');
+        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeUI();
+      });
+
+      updateThemeUI();
     </script>
 
   </body>

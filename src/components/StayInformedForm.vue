@@ -110,8 +110,8 @@ const submitHandler = async (data: any) => {
       label="Name (optional)"
       placeholder="Your name"
       outer-class="mb-3"
-      label-class="block mb-1 font-semibold text-gray-700 text-sm"
-      inner-class="border border-p4a-bg2 rounded-md overflow-hidden focus-within:border-p4a-bg1"
+      label-class="block mb-1 font-semibold text-p4a-subtle text-sm"
+      inner-class="border border-p4a-body-text rounded-md overflow-hidden focus-within:border-p4a-ink"
       input-class="w-full px-3 py-2 border-none focus:outline-none text-sm bg-white"
     />
 
@@ -122,8 +122,8 @@ const submitHandler = async (data: any) => {
       placeholder="your@email.com"
       validation="required|email"
       outer-class="mb-3"
-      label-class="block mb-1 font-semibold text-gray-700 text-sm"
-      inner-class="border border-p4a-bg2 rounded-md overflow-hidden focus-within:border-p4a-bg1"
+      label-class="block mb-1 font-semibold text-p4a-subtle text-sm"
+      inner-class="border border-p4a-body-text rounded-md overflow-hidden focus-within:border-p4a-ink"
       input-class="w-full px-3 py-2 border-none focus:outline-none text-sm bg-white"
     />
 
@@ -134,8 +134,8 @@ const submitHandler = async (data: any) => {
       placeholder="Select your role"
       @input="handleRoleChange"
       outer-class="mb-3"
-      label-class="block mb-1 font-semibold text-gray-700 text-sm"
-      inner-class="border border-p4a-bg2 rounded-md overflow-hidden focus-within:border-p4a-bg1"
+      label-class="block mb-1 font-semibold text-p4a-subtle text-sm"
+      inner-class="border border-p4a-body-text rounded-md overflow-hidden focus-within:border-p4a-ink"
       input-class="w-full px-3 py-2 border-none focus:outline-none text-sm bg-white"
       :options="[
         'Interested citizen',
@@ -155,15 +155,15 @@ const submitHandler = async (data: any) => {
       label="Please specify"
       placeholder="Enter your role"
       outer-class="mb-3"
-      label-class="block mb-1 font-semibold text-gray-700 text-sm"
-      inner-class="border border-p4a-bg2 rounded-md overflow-hidden focus-within:border-p4a-bg1"
+      label-class="block mb-1 font-semibold text-p4a-subtle text-sm"
+      inner-class="border border-p4a-body-text rounded-md overflow-hidden focus-within:border-p4a-ink"
       input-class="w-full px-3 py-2 border-none focus:outline-none text-sm bg-white"
     />
 
     <button
       type="submit"
       :disabled="isSubmitting"
-      class="flex items-center justify-center gap-2 w-full bg-p4a-bg1 hover:bg-p4a-bg2 disabled:bg-gray-400 text-white font-bold py-3 rounded-md transition-colors"
+      class="flex items-center justify-center gap-2 w-full bg-p4a-ink hover:bg-p4a-body-text disabled:bg-p4a-disabled text-white font-bold py-3 rounded-md transition-colors"
     >
       Stay informed
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
@@ -171,7 +171,7 @@ const submitHandler = async (data: any) => {
       </svg>
     </button>
 
-    <p v-if="submitMessage" class="mt-3 text-sm text-center" :class="submitMessage.includes('Thanks') ? 'text-green-600' : 'text-red-600'">
+    <p v-if="submitMessage" class="mt-3 text-sm text-center" :class="submitMessage.includes('Thanks') ? 'text-green-600' : 'text-p4a-danger'">
       {{ submitMessage }}
     </p>
   </FormKit>

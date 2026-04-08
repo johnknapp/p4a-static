@@ -112,6 +112,35 @@ npm run preview
 └── package.json               # Dependencies and scripts
 ```
 
+## Color System
+
+Defined in `src/styles/global.css` under `@theme inline`. All tokens are prefixed `p4a-` and available as Tailwind utilities (e.g. `bg-p4a-surface`, `text-p4a-ink`).
+
+The palette is a single blue ramp. Light and dark mode values are set via `light-dark()`.
+
+| Token | Light | Dark | Role |
+|---|---|---|---|
+| `p4a-bg` | `#d4defc` | `#111d40` | Page background |
+| `p4a-surface` | `#e6ebfa` | `#1e3066` | Card / panel background (sits above bg) |
+| `p4a-navy` | `#1e3066` | `#0a1228` | Nav bar, hero section |
+| `p4a-deep` | `#111d40` | `#e6ebfa` | Darkest anchor; dark mode nav depth |
+| `p4a-ink` | `#32498f` | `#9fb5f5` | Headings, section titles |
+| `p4a-body-text` | `#3d5bb8` | `#7494f2` | Body / paragraph text |
+| `p4a-link` | `#305adb` | `#5176e8` | Clickable links, CTA outlines |
+| `p4a-accent` | `#5176e8` | `#5176e8` | Primary buttons, hero title, step numbers |
+| `p4a-muted` | `#7494f2` | `#3d5bb8` | Supporting / label text |
+| `p4a-pale` | `#9fb5f5` | `#32498f` | Light text on dark backgrounds |
+| `p4a-subtle` | `#374151` | `#d1d5db` | Form labels, table headers |
+| `p4a-faint` | `#6b7280` | `#9ca3af` | Help text, secondary descriptive text |
+| `p4a-disabled` | `#9ca3af` | `#4b5563` | Disabled button backgrounds |
+| `p4a-danger` | `#dc2626` | `#f87171` | Error messages, destructive actions |
+
+### Usage notes
+- `p4a-bg` vs `p4a-surface`: `p4a-bg` is the page canvas; `p4a-surface` is for elements that sit on top of it (cards, panels). The slight value difference creates a subtle lift without a hard border.
+- `p4a-navy` / `p4a-deep`: Both are dark navies used for the nav bar and dark backgrounds. `p4a-deep` is the darkest value, primarily useful in dark mode.
+- `p4a-accent`: Intentionally the same in both modes — test contrast if adjusting.
+- Dark mode is toggled by adding the `.dark` class to `<html>` and setting `color-scheme` to match.
+
 ## Original requirements
 - Astro static site framework
 - Tailwind CSS styles and colors

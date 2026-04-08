@@ -141,8 +141,8 @@ const submitForm = async (formData: any) => {
 <template>
   <div>
     <div v-if="isSubmitted" class="text-center py-12">
-      <h2 class="text-3xl font-bold text-p4a-bg1 mb-4">Thank you!</h2>
-      <p class="text-lg text-p4a-bg0">Your report has been submitted securely.</p>
+      <h2 class="text-3xl font-bold text-p4a-ink mb-4">Thank you!</h2>
+      <p class="text-lg">Your report has been submitted securely.</p>
     </div>
 
     <FormKit
@@ -157,7 +157,7 @@ const submitForm = async (formData: any) => {
         :allow-incomplete="true"
         tab-style="progress"
       >
-        <p class="text-sm mb-6 text-center text-gray-600">Required unless marked optional</p>
+        <p class="text-sm mb-6 text-center text-p4a-faint">Required unless marked optional</p>
         <!-- Step 1: The Problem -->
         <FormKit type="step" name="the_problem" label="The Problem">
           <FormKit
@@ -173,8 +173,8 @@ const submitForm = async (formData: any) => {
             rows="4"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -193,8 +193,8 @@ const submitForm = async (formData: any) => {
             }"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -209,8 +209,8 @@ const submitForm = async (formData: any) => {
             validation="required"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -228,8 +228,8 @@ const submitForm = async (formData: any) => {
             }"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -246,8 +246,8 @@ const submitForm = async (formData: any) => {
             help="Optional"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -267,8 +267,8 @@ const submitForm = async (formData: any) => {
             validation="required"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               wrapper: 'space-y-2 flex flex-col',
               options: 'space-y-2',
               option: 'flex items-center',
@@ -294,8 +294,8 @@ const submitForm = async (formData: any) => {
             rows="3"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -313,8 +313,8 @@ const submitForm = async (formData: any) => {
             rows="3"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -333,8 +333,8 @@ const submitForm = async (formData: any) => {
             rows="3"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -352,8 +352,8 @@ const submitForm = async (formData: any) => {
             rows="3"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -362,8 +362,8 @@ const submitForm = async (formData: any) => {
 
         <!-- Step 4: Privacy & review -->
         <FormKit type="step" name="privacy_and_review" label="Privacy & review">
-          <fieldset class="mb-6 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">Acknowledgements</legend>
+          <fieldset class="mb-6 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">Acknowledgements</legend>
             <div class="space-y-2 mt-2">
               <FormKit
                 type="checkbox"
@@ -427,8 +427,8 @@ const submitForm = async (formData: any) => {
             </div>
           </fieldset>
 
-          <fieldset class="mb-6 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">Would you like to stay reachable?</legend>
+          <fieldset class="mb-6 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">Would you like to stay reachable?</legend>
             <div class="space-y-2 mt-2">
               <label v-for="option in ['Submit anonymously with no follow-up', 'Provide email for follow-up']" :key="option" class="flex items-center">
                 <input
@@ -439,10 +439,10 @@ const submitForm = async (formData: any) => {
                   class="w-5 h-5 mr-3"
                   required
                   />
-                  <span class="text-gray-900">{{ option }}</span>
+                  <span class="text-p4a-subtle">{{ option }}</span>
                 </label>
               </div>
-              <p class="text-sm mt-2d text-center text-p4a-bg2">We will use your email to create a free account for you.</p>
+              <p class="text-sm mt-2d text-center text-p4a-body-text">We will use your email to create a free account for you.</p>
           </fieldset>
 
           <!-- Hidden field to capture followupMode in FormKit structure -->
@@ -459,8 +459,8 @@ const submitForm = async (formData: any) => {
             }"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -473,8 +473,8 @@ const submitForm = async (formData: any) => {
             :options="['P4A may contact me about this report']"
             :classes="{
               outer: 'mb-6',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               wrapper: 'space-y-2 flex flex-col',
               options: 'space-y-2',
               option: 'flex items-center',
@@ -484,8 +484,8 @@ const submitForm = async (formData: any) => {
             }"
           />
 
-          <div class="w-full px-2 pt-2 pb-1 mb-6 bg-p4a-bg4">
-            <p class="mb-2 text-sm text-p4a-body">
+          <div class="w-full px-2 pt-2 pb-1 mb-6 bg-p4a-accent">
+            <p class="mb-2 text-sm text-p4a-bg">
               You do not need legal language or a polished writeup. Just start with what you’ve seen.
               Please submit only sincere, good-faith reports. Anonymous submissions are welcome, but not all reports will advance.
               Please review your responses before submitting.

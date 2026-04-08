@@ -134,8 +134,8 @@ const submitForm = async (formData: any) => {
 <template>
   <div>
     <div v-if="isSubmitted" class="text-center py-12">
-      <h2 class="text-3xl font-bold text-p4a-bg1 mb-4">Thank you!</h2>
-      <p class="text-lg text-p4a-bg0">We've received your inquiry and will be in touch soon.</p>
+      <h2 class="text-3xl font-bold text-p4a-ink mb-4">Thank you!</h2>
+      <p class="text-lg">We've received your inquiry and will be in touch soon.</p>
     </div>
 
     <FormKit
@@ -150,7 +150,7 @@ const submitForm = async (formData: any) => {
         :allow-incomplete="true"
         tab-style="progress"
       >
-        <p class="text-sm mb-6 text-center text-gray-600">All entries are required</p>
+        <p class="text-sm mb-6 text-center text-p4a-faint">All entries are required</p>
 
         <FormKit type="step" name="about_you" label="About you">
           <!-- Introduction -->
@@ -162,16 +162,16 @@ const submitForm = async (formData: any) => {
             rows="4"
             :classes="{
               outer: 'mb-8',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
           />
 
           <!-- Weekly Availability -->
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">Weekly availability</legend>
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">Weekly availability</legend>
             <p class="text-sm mb-4">How much time can you realistically contribute per week?</p>
 
             <div class="space-y-2">
@@ -181,10 +181,10 @@ const submitForm = async (formData: any) => {
                   name="availability"
                   v-model="availability"
                   :value="option.value"
-                  class="w-5 h-5 mr-3 text-blue-600"
+                  class="w-5 h-5 mr-3 text-p4a-link"
                   required
                 />
-                <span class="text-gray-900">{{ option.label }}</span>
+                <span class="text-p4a-subtle">{{ option.label }}</span>
               </label>
             </div>
           </fieldset>
@@ -200,10 +200,10 @@ const submitForm = async (formData: any) => {
           <FormKit type="hidden" name="strengths" v-model="strengthsString" />
 
           <!-- Contribution -->
-          <fieldset class="mb-12 p-4 border border-p4a-bg2 rounded-lg">
+          <fieldset class="mb-12 p-4 border border-p4a-body-text rounded-lg">
             <legend class="px-2 font-semibold text-xl">Tell us what you like to do</legend>
             <p class="text-sm mb-1">Choose your 1st favorite skill and optionally choose your 2nd favorite skill</p>
-            <p class="text-sm italic text-gray-500 mb-4">Most people are flexible in at least one other area.</p>
+            <p class="text-sm italic text-p4a-faint mb-4">Most people are flexible in at least one other area.</p>
 
             <div class="space-y-3">
               <div class="grid grid-cols-[1fr_100px_100px] gap-4 items-center font-semibold mb-2">
@@ -242,7 +242,7 @@ const submitForm = async (formData: any) => {
                 <button
                   type="button"
                   @click="removeSecondary"
-                  class="text-blue-600 hover:text-blue-800 text-sm"
+                  class="text-p4a-link hover:text-p4a-ink text-sm"
                 >
                   Remove
                 </button>
@@ -251,7 +251,7 @@ const submitForm = async (formData: any) => {
           </fieldset>
 
           <!-- Strengths -->
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
             <legend class="px-2 font-semibold text-xl">Tell us your strengths</legend>
             <p class="text-sm mb-4">Select up to 5 strengths that describe how you naturally show up</p>
 
@@ -262,10 +262,10 @@ const submitForm = async (formData: any) => {
                 type="button"
                 @click="toggleStrength(strength)"
                 :class="[
-                  'px-4 py-2 rounded-full text-sm font-medium transition-colors',
+                  'px-4 py-2 rounded-full text-sm font-medium transition-colors border',
                   selectedStrengths.includes(strength)
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-blue-100 text-blue-900 hover:bg-blue-200'
+                    ? 'bg-p4a-ink text-white border-p4a-ink'
+                    : 'bg-p4a-muted text-white border-p4a-muted hover:bg-p4a-accent hover:border-p4a-accent'
                 ]"
                 :disabled="!selectedStrengths.includes(strength) && selectedStrengths.length >= 5"
               >
@@ -286,8 +286,8 @@ const submitForm = async (formData: any) => {
             validation="required"
             :classes="{
               outer: 'mb-8',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -301,8 +301,8 @@ const submitForm = async (formData: any) => {
             validation="required|email"
             :classes="{
               outer: 'mb-8',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"

@@ -136,8 +136,8 @@ const submitForm = async (formData: any) => {
 <template>
   <div>
     <div v-if="isSubmitted" class="text-center py-12">
-      <h2 class="text-3xl font-bold text-p4a-bg1 mb-4">Thank you!</h2>
-      <p class="text-lg text-p4a-bg0">We appreciate you taking the time to share your perspective.</p>
+      <h2 class="text-3xl font-bold text-p4a-ink mb-4">Thank you!</h2>
+      <p class="text-lg">We appreciate you taking the time to share your perspective.</p>
     </div>
 
     <FormKit
@@ -152,12 +152,12 @@ const submitForm = async (formData: any) => {
         :allow-incomplete="false"
         tab-style="progress"
       >
-        <p class="text-sm mb-6 text-center text-gray-600">All entries are required unless marked optional</p>
+        <p class="text-sm mb-6 text-center text-p4a-faint">All entries are required unless marked optional</p>
 
         <!-- Step 1: About you -->
         <FormKit type="step" name="about_you" label="About you">
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">Which best describes you?</legend>
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">Which best describes you?</legend>
             <div class="space-y-2">
               <label v-for="option in roleOptions" :key="option" class="flex items-center">
                 <input
@@ -166,10 +166,10 @@ const submitForm = async (formData: any) => {
                   :value="option"
                   v-model="role"                  
                   @change="roleOther = (option === 'Other')"
-                  class="w-5 h-5 mr-3 text-blue-600"
+                  class="w-5 h-5 mr-3 text-p4a-link"
                   required
                 />
-                <span class="text-gray-900">{{ option }}</span>
+                <span class="text-p4a-subtle">{{ option }}</span>
               </label>
             </div>
 
@@ -194,12 +194,12 @@ const submitForm = async (formData: any) => {
         <!-- Step 2: Your perspective -->
         <FormKit type="step" name="your_perspective" label="Your perspective">
           <!-- Engagement Level -->
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">
               How engaged are you with public policy or civic issues today?
             </legend>
             <div class="flex items-center justify-center gap-3">
-              <span class="text-sm text-gray-600 whitespace-nowrap">Not very engaged</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Not very engaged</span>
               <div class="flex gap-3">
                 <label v-for="n in 5" :key="n" class="flex items-center">
                   <input
@@ -212,7 +212,7 @@ const submitForm = async (formData: any) => {
                   />
                 </label>
               </div>
-              <span class="text-sm text-gray-600 whitespace-nowrap">Very engaged</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Very engaged</span>
             </div>
           </fieldset>
 
@@ -220,12 +220,12 @@ const submitForm = async (formData: any) => {
           <FormKit type="hidden" name="engagementLevel" v-model="engagementLevel" validation="required" />
 
           <!-- Current Effectiveness -->
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">
               How effective are current systems at surfacing good ideas for improving government and public policy?
             </legend>
             <div class="flex items-center justify-center gap-3">
-              <span class="text-sm text-gray-600 whitespace-nowrap">Very ineffective</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Very ineffective</span>
               <div class="flex gap-3">
                 <label v-for="n in 5" :key="n" class="flex items-center">
                   <input
@@ -238,7 +238,7 @@ const submitForm = async (formData: any) => {
                   />
                 </label>
               </div>
-              <span class="text-sm text-gray-600 whitespace-nowrap">Very effective</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Very effective</span>
             </div>
           </fieldset>
 
@@ -246,12 +246,12 @@ const submitForm = async (formData: any) => {
           <FormKit type="hidden" name="currentEffectiveness" v-model="currentEffectiveness" validation="required" />
 
           <!-- Compelling Score -->
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">
               How compelling do you find the idea of Playbook for America?
             </legend>
             <div class="flex items-center justify-center gap-3">
-              <span class="text-sm text-gray-600 whitespace-nowrap">Not compelling</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Not compelling</span>
               <div class="flex gap-3">
                 <label v-for="n in 5" :key="n" class="flex items-center">
                   <input
@@ -264,7 +264,7 @@ const submitForm = async (formData: any) => {
                   />
                 </label>
               </div>
-              <span class="text-sm text-gray-600 whitespace-nowrap">Very compelling</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Very compelling</span>
             </div>
           </fieldset>
 
@@ -279,8 +279,8 @@ const submitForm = async (formData: any) => {
             help="Optional"
             :classes="{
               outer: 'mb-8',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               wrapper: '',
               inner: 'mt-1',
               input: 'py-2'
@@ -291,12 +291,12 @@ const submitForm = async (formData: any) => {
         <!-- Step 3: Engagement -->
         <FormKit type="step" name="engagement" label="Engagement">
           <!-- Likelihood to Engage -->
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">
               How likely would you be to engage with a platform like this?
             </legend>
             <div class="flex items-center justify-center gap-3">
-              <span class="text-sm text-gray-600 whitespace-nowrap">Very unlikely</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Very unlikely</span>
               <div class="flex gap-3">
                 <label v-for="n in 5" :key="n" class="flex items-center">
                   <input
@@ -309,7 +309,7 @@ const submitForm = async (formData: any) => {
                   />
                 </label>
               </div>
-              <span class="text-sm text-gray-600 whitespace-nowrap">Very likely</span>
+              <span class="text-sm text-p4a-faint whitespace-nowrap">Very likely</span>
             </div>
           </fieldset>
 
@@ -325,8 +325,8 @@ const submitForm = async (formData: any) => {
             validation="required"
             :classes="{
               outer: 'mb-8',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               wrapper: 'space-y-2 flex flex-col',
               options: 'space-y-2',
               option: 'flex items-center',
@@ -337,8 +337,8 @@ const submitForm = async (formData: any) => {
           />
 
           <!-- Main Concerns -->
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">What concerns you most about a platform like this?</legend>
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">What concerns you most about a platform like this?</legend>
             <div class="space-y-2">
               <label v-for="option in concernOptions" :key="option" class="flex items-center">
                 <input
@@ -347,10 +347,10 @@ const submitForm = async (formData: any) => {
                   :value="option"
                   v-model="mainConcerns"
                   @change="concernOther = (option === 'Other')"
-                  class="w-5 h-5 mr-3 text-blue-600"
+                  class="w-5 h-5 mr-3 text-p4a-link"
                   required
                 />
-                <span class="text-gray-900">{{ option }}</span>
+                <span class="text-p4a-subtle">{{ option }}</span>
               </label>
             </div>
 
@@ -374,8 +374,8 @@ const submitForm = async (formData: any) => {
 
         <!-- Step 4: Final thoughts -->
         <FormKit type="step" name="final_thoughts" label="Final thoughts">
-          <fieldset class="mb-8 p-4 border border-p4a-bg2 rounded-lg">
-            <legend class="px-2 font-semibold text-gray-900">Do you think a platform like Playbook for America is worth pursuing?</legend>
+          <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
+            <legend class="px-2 font-semibold text-p4a-subtle">Do you think a platform like Playbook for America is worth pursuing?</legend>
             <div class="space-y-2">
               <label v-for="option in worthPursuingOptions" :key="option" class="flex items-center">
                 <input
@@ -383,10 +383,10 @@ const submitForm = async (formData: any) => {
                   name="worthPursuing"
                   :value="option"
                   v-model="worthPursuing"
-                  class="w-5 h-5 mr-3 text-blue-600"
+                  class="w-5 h-5 mr-3 text-p4a-link"
                   required
                 />
-                <span class="text-gray-900">{{ option }}</span>
+                <span class="text-p4a-subtle">{{ option }}</span>
               </label>
             </div>
           </fieldset>
@@ -402,8 +402,8 @@ const submitForm = async (formData: any) => {
             rows="4"
             :classes="{
               outer: 'mb-8',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"
@@ -417,8 +417,8 @@ const submitForm = async (formData: any) => {
             validation="email"
             :classes="{
               outer: 'mb-8',
-              fieldset: 'border border-p4a-bg2 rounded-lg p-4',
-              legend: 'px-2 font-semibold text-gray-900',
+              fieldset: 'border border-p4a-body-text rounded-lg p-4',
+              legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
               input: 'py-2'
             }"

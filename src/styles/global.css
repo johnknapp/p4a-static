@@ -5,23 +5,35 @@
 @theme inline {
   --font-sans: "Jost", system-ui, -apple-system, sans-serif;
   --font-serif: "Libertinus Serif", Georgia, serif;
-  --color-p4a-body: #e6ebfa;
-  --color-p4a-body0: #d4defc;
-  --color-p4a-bg: #111d40;
-  --color-p4a-bg0: #1e3066;
-  --color-p4a-bg1: #32498f;
-  --color-p4a-bg2: #3d5bb8;
-  --color-p4a-bg3: #305adb;
-  --color-p4a-bg4: #5176e8;
-  --color-p4a-bg5: #7494f2;
-  --color-p4a-bg6: #9fb5f5;
+  --color-p4a-bg:        light-dark(#d4defc, #111d40);
+  --color-p4a-surface:   light-dark(#e6ebfa, #1e3066);
+  --color-p4a-navy:      light-dark(#1e3066, #0a1228);
+  --color-p4a-deep:      light-dark(#111d40, #e6ebfa);
+  --color-p4a-ink:       light-dark(#32498f, #9fb5f5);
+  --color-p4a-body-text: light-dark(#3d5bb8, #7494f2);
+  --color-p4a-link:      light-dark(#305adb, #5176e8);
+  --color-p4a-accent:    light-dark(#5176e8, #5176e8);
+  --color-p4a-muted:     light-dark(#7494f2, #3d5bb8);
+  --color-p4a-pale:      light-dark(#9fb5f5, #32498f);
+  --color-p4a-subtle:    light-dark(#374151, #d1d5db);
+  --color-p4a-faint:     light-dark(#6b7280, #9ca3af);
+  --color-p4a-disabled:  light-dark(#9ca3af, #4b5563);
+  --color-p4a-danger:    light-dark(#dc2626, #f87171);
   --breakpoint-xs: 450px;
 }
 
 @layer base {
+  :root {
+    color-scheme: light dark;
+    --fk-color-help: #6b7280;
+  }
   body {
     margin: 0;
     padding: 0;
+  }
+
+  .dark .formkit-help {
+    color: #9ca3af;
   }
 }
 
