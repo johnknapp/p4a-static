@@ -264,8 +264,8 @@ const submitForm = async (formData: any) => {
                 :class="[
                   'px-4 py-2 rounded-full text-sm font-medium transition-colors border',
                   selectedStrengths.includes(strength)
-                    ? 'bg-p4a-ink text-white border-p4a-ink'
-                    : 'bg-p4a-muted text-white border-p4a-muted hover:bg-p4a-accent hover:border-p4a-accent'
+                    ? 'bg-p4a-muted text-white border-p4a-ink'
+                    : 'bg-p4a-ink text-white border-p4a-muted hover:bg-p4a-accent hover:border-p4a-accent'
                 ]"
                 :disabled="!selectedStrengths.includes(strength) && selectedStrengths.length >= 5"
               >
