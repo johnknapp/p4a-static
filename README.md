@@ -141,6 +141,14 @@ The palette is a single blue ramp. Light and dark mode values are set via `light
 - `p4a-accent`: Intentionally the same in both modes — test contrast if adjusting.
 - Dark mode is toggled by adding the `.dark` class to `<html>` and setting `color-scheme` to match.
 
+### Fine-tuning guidelines
+
+**Tweak hex values in `global.css`** — the common case. Use when a token is semantically correct but the shade feels off (e.g. "ink is too blue in dark mode"). Both light and dark values live on the same line, edit them as a pair.
+
+**Change color assignment in markup** — use when the wrong token is applied to an element. The semantic meaning is wrong, not the shade (e.g. a heading styled as body text, or a surface that should be a background).
+
+**Add a new token** — only when there is a genuinely new semantic role that no existing token covers, and it will be used in at least 2–3 places. One-off colors don't need a token; use the hex value inline.
+
 ## Original requirements
 - Astro static site framework
 - Tailwind CSS styles and colors
