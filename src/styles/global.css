@@ -7,6 +7,7 @@
   --font-serif: "Libertinus Serif", Georgia, serif;
   --color-p4a-bg:        light-dark(#d4defc, #111d40);
   --color-p4a-surface:   light-dark(#e6ebfa, #1e3066);
+  --color-p4a-card:      light-dark(#ffffff, #2a3f80);
   --color-p4a-navy:      light-dark(#1e3066, #0a1228);
   --color-p4a-deep:      light-dark(#111d40, #e6ebfa);
   --color-p4a-ink:       light-dark(#32498f, #9fb5f5);
