@@ -163,7 +163,7 @@ const submitHandler = async (data: any) => {
     <button
       type="submit"
       :disabled="isSubmitting"
-      class="flex items-center justify-center gap-2 w-full bg-p4a-ink hover:bg-p4a-body-text disabled:bg-p4a-disabled text-white font-bold py-3 rounded-md transition-colors"
+      class="flex items-center justify-center gap-2 w-full bg-p4a-accent hover:bg-p4a-muted text-white disabled:bg-p4a-disabled font-bold py-3 rounded-md transition-colors"
     >
       Stay informed
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
