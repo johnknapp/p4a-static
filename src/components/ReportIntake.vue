@@ -485,7 +485,7 @@ const submitForm = async (formData: any) => {
           />
 
           <div class="w-full px-2 pt-2 pb-1 mb-6 bg-p4a-accent">
-            <p class="mb-2 text-sm text-p4a-bg">
+            <p class="mb-2 text-sm text-p4a-body-bg">
               You do not need legal language or a polished writeup. Just start with what you’ve seen.
               Please submit only sincere, good-faith reports. Anonymous submissions are welcome, but not all reports will advance.
               Please review your responses before submitting.

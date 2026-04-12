@@ -120,8 +120,8 @@ The palette is a single blue ramp. Light and dark mode values are set via `light
 
 | Token | Light | Dark | Role |
 |---|---|---|---|
-| `p4a-bg` | `#d4defc` | `#111d40` | Page background |
-| `p4a-surface` | `#e6ebfa` | `#1e3066` | Card / panel background (sits above bg) |
+| `p4a-body-bg` | `#d4defc` | `#111d40` | Page background |
+| `p4a-surface` | `#e6ebfa` | `#1e3066` | Card / panel background (sits above body-bg) |
 | `p4a-navy` | `#1e3066` | `#0a1228` | Nav bar, hero section |
 | `p4a-deep` | `#111d40` | `#e6ebfa` | Darkest anchor; dark mode nav depth |
 | `p4a-ink` | `#32498f` | `#9fb5f5` | Headings, section titles |
@@ -136,7 +136,7 @@ The palette is a single blue ramp. Light and dark mode values are set via `light
 | `p4a-danger` | `#dc2626` | `#f87171` | Error messages, destructive actions |
 
 ### Usage notes
-- `p4a-bg` vs `p4a-surface`: `p4a-bg` is the page canvas; `p4a-surface` is for elements that sit on top of it (cards, panels). The slight value difference creates a subtle lift without a hard border.
+- `p4a-body-bg` vs `p4a-surface`: `p4a-body-bg` is the page canvas; `p4a-surface` is for elements that sit on top of it (cards, panels). The slight value difference creates a subtle lift without a hard border.
 - `p4a-navy` / `p4a-deep`: Both are dark navies used for the nav bar and dark backgrounds. `p4a-deep` is the darkest value, primarily useful in dark mode.
 - `p4a-accent`: Intentionally the same in both modes — test contrast if adjusting.
 - Dark mode is toggled by adding the `.dark` class to `<html>` and setting `color-scheme` to match.
