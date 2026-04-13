@@ -149,7 +149,7 @@ const submitForm = async (formData: any) => {
     >
       <FormKit
         type="multi-step"
-        :allow-incomplete="false"
+        :allow-incomplete="true"
         tab-style="progress"
       >
         <p class="text-sm mb-6 text-center text-p4a-faint">All entries are required unless marked optional</p>
@@ -222,7 +222,7 @@ const submitForm = async (formData: any) => {
           <!-- Current Effectiveness -->
           <fieldset class="mb-8 p-4 border border-p4a-body-text rounded-lg">
             <legend class="px-2 font-semibold text-p4a-subtle">
-              How effective are current systems at surfacing good ideas for improving government and public policy?
+              How well do current systems surface good ideas for improving government and public policy?
             </legend>
             <div class="flex items-center justify-center gap-3">
               <span class="text-sm text-p4a-faint whitespace-nowrap">Very ineffective</span>
@@ -279,6 +279,7 @@ const submitForm = async (formData: any) => {
             help="Optional"
             :classes="{
               outer: 'mb-8',
+              help: '!text-p4a-body-text',
               fieldset: 'border border-p4a-body-text rounded-lg p-4',
               legend: 'px-2 font-semibold text-p4a-subtle',
               wrapper: '',
@@ -320,7 +321,7 @@ const submitForm = async (formData: any) => {
           <FormKit
             type="checkbox"
             name="howEngage"
-            label="How would you most likely engage?"
+            label="Which of the following abilities interest you?"
             :options="engagementOptions"
             validation="required"
             :classes="{
@@ -402,6 +403,7 @@ const submitForm = async (formData: any) => {
             rows="4"
             :classes="{
               outer: 'mb-8',
+              help: '!text-p4a-body-text',
               fieldset: 'border border-p4a-body-text rounded-lg p-4',
               legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
@@ -417,6 +419,7 @@ const submitForm = async (formData: any) => {
             validation="email"
             :classes="{
               outer: 'mb-8',
+              help: '!text-p4a-body-text',
               fieldset: 'border border-p4a-body-text rounded-lg p-4',
               legend: 'px-2 font-semibold text-p4a-subtle',
               inner: 'mt-1',
