@@ -67,12 +67,15 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
                 <th id="th-occurs_at" class="text-left px-4 py-3 font-semibold text-p4a-ink cursor-pointer hover:bg-p4a-body-bg select-none w-32">
                   Event Date <span id="sort-occurs_at" class="text-xs"></span>
                 </th>
+                <th id="th-location" class="text-left px-4 py-3 font-semibold text-p4a-ink cursor-pointer hover:bg-p4a-body-bg select-none w-32">
+                  Location <span id="sort-location" class="text-xs"></span>
+                </th>
                 <th class="text-left px-4 py-3 font-semibold text-p4a-ink w-72">Focus Areas</th>
               </tr>
             </thead>
             <tbody id="dir-tbody">
               <tr id="dir-empty" class="hidden">
-                <td colspan="4" class="text-center py-10 text-p4a-ink">No directory entries found.</td>
+                <td colspan="5" class="text-center py-10 text-p4a-ink">No directory entries found.</td>
               </tr>
             </tbody>
           </table>
@@ -168,6 +171,23 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
               type="date"
               class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link"
             />
+          </div>
+
+          <!-- Location -->
+          <div class="mb-5">
+            <label class="block font-semibold text-p4a-ink mb-1" for="form-location">Location</label>
+            <select
+              id="form-location"
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link"
+            >
+              <option value="">Select a location…</option>
+              <option value="online">Online</option>
+              <option value="national">National</option>
+              <option value="statewide">Statewide</option>
+              <option value="local">Local</option>
+              <option value="specific_city_region">Specific city/region</option>
+            </select>
+            <p id="location-error" class="hidden text-sm text-red-600 mt-1">Please select a location.</p>
           </div>
 
           <!-- Focus Areas -->
@@ -283,6 +303,14 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
     upcoming_event:        'Event or gathering',
     call_for_action:       'Call to action',
     civic_resource:        'Civic resource',
+  };
+
+  const LOCATION_LABELS = {
+    online:               'Online',
+    national:             'National',
+    statewide:            'Statewide',
+    local:                'Local',
+    specific_city_region: 'Specific city/region',
   };
 
   const ENTRY_TYPE_DESCRIPTIONS = {
@@ -450,10 +478,12 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
     const entries = getFiltered();
 
     // Update sort indicators
-    ['title', 'entry_type', 'occurs_at'].forEach(col => {
+    const SVG_UP   = '<svg xmlns="http://www.w3.org/2000/svg" class="inline w-3 h-3" viewBox="0 0 256 256"><path fill="currentColor" d="M205.66 117.66a8 8 0 0 1-11.32 0L136 59.31V216a8 8 0 0 1-16 0V59.31l-58.34 58.35a8 8 0 0 1-11.32-11.32l72-72a8 8 0 0 1 11.32 0l72 72a8 8 0 0 1 0 11.32"/></svg>';
+    const SVG_DOWN = '<svg xmlns="http://www.w3.org/2000/svg" class="inline w-3 h-3" viewBox="0 0 256 256"><path fill="currentColor" d="m205.66 149.66l-72 72a8 8 0 0 1-11.32 0l-72-72a8 8 0 0 1 11.32-11.32L120 196.69V40a8 8 0 0 1 16 0v156.69l58.34-58.35a8 8 0 0 1 11.32 11.32"/></svg>';
+    ['title', 'entry_type', 'occurs_at', 'location'].forEach(col => {
       const el = document.getElementById(`sort-${col}`);
       if (!el) return;
-      el.textContent = sortCol === col ? (sortDir === 'asc' ? '▲' : '▼') : '';
+      el.innerHTML = sortCol === col ? (sortDir === 'asc' ? SVG_UP : SVG_DOWN) : '';
     });
 
     // Clear data rows but keep the emptyRow element in the DOM
@@ -504,6 +534,7 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
           </td>
           <td class="px-4 py-3 align-top text-p4a-ink">${escHtml(typeLabel)}</td>
           <td class="px-4 py-3 align-top text-p4a-ink">${escHtml(dateStr)}</td>
+          <td class="px-4 py-3 align-top text-p4a-ink">${escHtml(LOCATION_LABELS[e.location] || e.location || '—')}</td>
           <td class="px-4 py-3 align-top">
             <div class="flex items-start justify-between gap-2">
               <div>${focusAreaHtml}</div>
@@ -544,7 +575,7 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
   // -----------------------------------------------------------------------
   // Sort
   // -----------------------------------------------------------------------
-  ['title', 'entry_type', 'occurs_at'].forEach(col => {
+  ['title', 'entry_type', 'occurs_at', 'location'].forEach(col => {
     document.getElementById(`th-${col}`)?.addEventListener('click', () => {
       if (sortCol === col) {
         sortDir = sortDir === 'asc' ? 'desc' : 'asc';
@@ -581,6 +612,9 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
 
         <span class="font-semibold text-p4a-link text-right">Date</span>
         <span class="text-p4a-ink">${escHtml(formatDate(entry.occurs_at))}</span>
+
+        <span class="font-semibold text-p4a-link text-right">Location</span>
+        <span class="text-p4a-ink">${escHtml(LOCATION_LABELS[entry.location] || entry.location || '—')}</span>
 
         <span class="font-semibold text-p4a-link text-right">URL</span>
         <a href="${escHtml(entry.url)}" target="_blank" rel="noopener" class="text-p4a-link hover:underline truncate">${escHtml(entry.url)}</a>
@@ -633,7 +667,7 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
     document.getElementById('form-pid').value = pid || '';
 
     // Reset errors
-    ['type-error', 'title-error', 'desc-error', 'url-error', 'form-error'].forEach(id => {
+    ['type-error', 'title-error', 'desc-error', 'url-error', 'location-error', 'form-error'].forEach(id => {
       document.getElementById(id).classList.add('hidden');
     });
 
@@ -645,10 +679,11 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
       ? entry.occurs_at.split('T')[0]
       : '';
 
-    // Set radio
+    // Set radios
     document.querySelectorAll('input[name="entry_type"]').forEach(r => {
       r.checked = entry ? r.value === entry.entry_type : false;
     });
+    document.getElementById('form-location').value = entry ? (entry.location || '') : '';
 
     // Set focus areas
     selectedFocusAreaPids = entry ? entry.focus_areas.map(fa => fa.pid) : [];
@@ -708,6 +743,14 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
       document.getElementById('url-error').classList.add('hidden');
     }
 
+    const selectedLocation = document.getElementById('form-location').value;
+    if (!selectedLocation) {
+      document.getElementById('location-error').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('location-error').classList.add('hidden');
+    }
+
     if (!valid) return;
 
     const normalizedUrl = !/^https?:\/\//i.test(rawUrl) ? `https://${rawUrl}` : rawUrl;
@@ -718,6 +761,7 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
       description: desc,
       url: normalizedUrl,
       occurs_at: date || null,
+      location: selectedLocation,
       focus_area_pids: getSelectedFocusAreaPids(),
     };
 
