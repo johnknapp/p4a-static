@@ -72,9 +72,9 @@ const { title } = Astro.props;
         <div class="flex items-center gap-4 md:gap-6 lg:gap-8">
           <a href="https://app.playbookforamerica.org/start-signup" class="bg-p4a-accent hover:bg-p4a-muted text-white font-bold px-5 py-2.5 rounded-full transition-colors">Join free</a>
           <a href="https://app.playbookforamerica.org/signin" class="text-sm md:text-base hover:underline hover:decoration-2 hover:decoration-white">Signin</a>
+          <a href="/directory" class="text-sm hidden lg:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Civic Directory</a>
           <a href="/report-injustice" class="text-sm hidden md:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Report a civic problem</a>
-          <a href="/volunteer" class="text-sm hidden lg:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Volunteer</a>
-          <a href="/feedback" class="text-sm hidden lg:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Feedback</a>
+          <!-- <a href="/feedback" class="text-sm hidden lg:inline md:text-base hover:underline hover:decoration-2 hover:decoration-white">Feedback</a> -->
           <button
             id="drawer-open"
             aria-label="Open menu"
@@ -136,11 +136,12 @@ const { title } = Astro.props;
            ==================================================== -->
       <div class="flex flex-col px-4 py-6 gap-1 flex-grow">
         <a href="/" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Home</a>
+        <a href="/directory" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Civic Directory</a>
         <a href="/report-injustice" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Report a civic problem</a>
         <a href="/volunteer" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Volunteer to help grow P4A</a>
         <a href="/feedback" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Provide feedback</a>
         <a href="/about" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">About P4A</a>
-        <a href="/volunteer-staff" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Volunteer staff</a>
+        <a href="/team" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Meet the P4A team</a>
         <a href="/faq" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Frequently asked questions</a>
         <a href="/code-of-conduct" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Code of Conduct</a>
         <a href="/focus-areas" class="block px-4 py-3 rounded-md text-base font-medium hover:bg-white/10 transition-colors">Explore our focus areas</a>

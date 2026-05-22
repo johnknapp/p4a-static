@@ -1,0 +1,940 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import UaPopover from '../components/UaPopover.astro';
+const apiBase = import.meta.env.PUBLIC_REPORT_ENDPOINT_URL.replace('/report', '');
+const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
+---
+
+<Layout title="P4A Civic Directory">
+  <main>
+    <div class="container pt-24">
+      <div class="max-w-4xl mx-auto">
+        <header class="">
+          <h1 class="mb-3 text-4xl text-p4a-ink font-bold">Playbook for America Civic Directory</h1>
+          <p class="mb-8 text-xl max-w-prose leading-relaxed tracking-wider">
+            As a public benefit to the entire civic engagement landscape, we are pleased to host this curated directory of civic organizations, opportunities, events, campaigns, and resources connected to the civic issues people care about.
+          </p>
+        </header>
+
+        <h2 class="font-bold text-xl mb-2">Five entry types to suit the entire civic organization landscape</h2>
+        <ul class="mb-10 list-disc ml-12">
+          <li class="font-semibold">Civic organizations — <span class="font-normal">Community groups, nonprofits or government</span></li>
+          <li class="font-semibold">Volunteer opportunities — <span class="font-normal">Community groups, nonprofits or government</span></li>
+          <li class="font-semibold">Upcoming events — <span class="font-normal">Town halls, marches or gatherings, etc</span></li>
+          <li class="font-semibold">Calls for action — <span class="font-normal">Specific actions, calls, comments, votes, advocation</span></li>
+          <li class="font-semibold">Civic Resources — <span class="font-normal">Guides, tools, templates, instructions</span></li>
+        </ul>
+
+        <!-- Search + Add row -->
+        <div class="mb-4 flex items-center justify-between gap-4">
+          <input
+            id="dir-search"
+            type="text"
+            placeholder="Search by title, description, type, or focus areas..."
+            class="w-full max-w-md px-4 py-2 border border-p4a-link bg-p4a-surface rounded-md focus:ring-2 focus:ring-p4a-link focus:border-transparent outline-none text-p4a-ink"
+          />
+          <div class="flex items-center gap-2 shrink-0">
+            <UaPopover id="dir-add-help" position="right">
+              Add a civic organization, opportunity, event, or resource. Sign in required.
+            </UaPopover>
+            <!-- Add button — always visible, auth checked on submit -->
+            <button
+              id="dir-add-btn"
+              class="text-p4a-link hover:text-p4a-ink transition-colors shrink-0"
+              title="Add entry"
+            >
+              <Icon name="ph:plus" class="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div id="dir-loading" class="text-p4a-ink py-8">Loading...</div>
+        <div id="dir-error" class="hidden text-red-500 py-4"></div>
+        <div id="dir-table-wrap" class="hidden border border-p4a-link rounded-md overflow-hidden bg-p4a-surface">
+          <table class="w-full text-sm">
+            <thead class="bg-p4a-surface border-b border-p4a-link">
+              <tr>
+                <th id="th-title" class="text-left px-4 py-3 font-semibold text-p4a-ink cursor-pointer hover:bg-p4a-body-bg select-none">
+                  Title <span id="sort-title" class="text-xs"></span>
+                </th>
+                <th id="th-entry_type" class="text-left px-4 py-3 font-semibold text-p4a-ink cursor-pointer hover:bg-p4a-body-bg select-none w-44">
+                  Type <span id="sort-entry_type" class="text-xs"></span>
+                </th>
+                <th id="th-occurs_at" class="text-left px-4 py-3 font-semibold text-p4a-ink cursor-pointer hover:bg-p4a-body-bg select-none w-32">
+                  Event Date <span id="sort-occurs_at" class="text-xs"></span>
+                </th>
+                <th class="text-left px-4 py-3 font-semibold text-p4a-ink w-72">Focus Areas</th>
+              </tr>
+            </thead>
+            <tbody id="dir-tbody">
+              <tr id="dir-empty" class="hidden">
+                <td colspan="4" class="text-center py-10 text-p4a-ink">No directory entries found.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ====================================================
+       DETAIL MODAL
+       ==================================================== -->
+  <div id="detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div id="detail-overlay" class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl bg-p4a-surface shadow-2xl">
+      <div class="flex items-center justify-between px-6 pt-6 pb-2">
+        <h2 id="detail-title" class="text-xl font-bold text-p4a-ink"></h2>
+        <button id="detail-close" class="text-p4a-link hover:text-p4a-ink transition-colors">
+          <Icon name="ph:x" class="w-5 h-5" />
+        </button>
+      </div>
+      <div id="detail-body" class="px-6 pb-6 mt-2 text-sm space-y-3"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       CREATE/EDIT MODAL
+       ==================================================== -->
+  <div id="form-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div id="form-overlay" class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl bg-p4a-surface shadow-2xl">
+      <div class="flex items-center justify-between px-6 pt-6 pb-2">
+        <h2 id="form-modal-title" class="text-2xl font-bold text-p4a-ink">New Civic Directory Entry</h2>
+        <button id="form-close" class="text-p4a-link hover:text-p4a-ink transition-colors">
+          <Icon name="ph:x" class="w-5 h-5" />
+        </button>
+      </div>
+      <div class="px-6 pb-6">
+        <form id="dir-form" novalidate>
+          <input type="hidden" id="form-pid" value="" />
+
+          <!-- Type -->
+          <div class="mb-5">
+            <label class="block font-semibold text-p4a-ink mb-1">Type</label>
+            <p class="text-sm text-p4a-link mb-2">Carefully select the correct directory listing type</p>
+            <div class="space-y-2" id="type-radios"></div>
+            <p id="type-error" class="hidden text-sm text-red-600 mt-1">Please select a type.</p>
+          </div>
+
+          <!-- Title -->
+          <div class="mb-5">
+            <label class="block font-semibold text-p4a-ink mb-1" for="form-title">Title</label>
+            <input
+              id="form-title"
+              type="text"
+              placeholder="A brief title for this entry"
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link"
+            />
+            <p id="title-error" class="hidden text-sm text-red-600 mt-1">Title must be 3–200 characters.</p>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-5">
+            <label class="block font-semibold text-p4a-ink mb-1" for="form-desc">Description</label>
+            <textarea
+              id="form-desc"
+              rows="5"
+              placeholder="Provide enough detail to help people decide if they want to click through."
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link resize-y min-h-[120px]"
+            ></textarea>
+            <p id="desc-error" class="hidden text-sm text-red-600 mt-1">Description must be 50–500 characters.</p>
+          </div>
+
+          <!-- URL -->
+          <div class="mb-5">
+            <label class="block font-semibold text-p4a-ink mb-1" for="form-url">URL</label>
+            <input
+              id="form-url"
+              type="text"
+              placeholder="https://"
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link"
+            />
+            <p id="url-error" class="hidden text-sm text-red-600 mt-1">Please enter a valid URL.</p>
+          </div>
+
+          <!-- Event Date -->
+          <div class="mb-5">
+            <label class="block font-semibold text-p4a-ink mb-1" for="form-date">
+              Event Date <span class="font-normal text-p4a-link text-sm">(required for Upcoming Event)</span>
+            </label>
+            <input
+              id="form-date"
+              type="date"
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link"
+            />
+          </div>
+
+          <!-- Focus Areas -->
+          <div class="mb-5">
+            <label class="block font-semibold text-p4a-ink mb-1">
+              Focus Areas <span class="font-normal text-p4a-link text-sm">(up to 3)</span>
+            </label>
+            <div id="focus-area-picker" class="border border-p4a-link rounded-md px-3 py-2 max-h-48 overflow-y-auto space-y-3 bg-p4a-body-bg text-sm text-p4a-ink">
+              <span class="text-p4a-link text-xs">Loading…</span>
+            </div>
+            <p id="focus-area-error" class="hidden text-sm text-red-600 mt-1">You can select up to 3 focus areas.</p>
+          </div>
+
+          <!-- Submit row -->
+          <div class="flex justify-end gap-3 mt-6">
+            <button
+              type="button"
+              id="form-cancel"
+              class="px-5 py-2 rounded-lg border border-p4a-link text-p4a-link text-sm font-semibold hover:bg-p4a-body-bg transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              id="form-submit"
+              class="px-5 py-2 rounded-lg bg-p4a-link text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              Create Entry
+            </button>
+          </div>
+          <p id="form-error" class="hidden text-sm text-red-600 mt-3"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================
+       INLINE AUTH PANEL (shown after unauthenticated submit)
+       ==================================================== -->
+  <div id="auth-panel" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div id="auth-panel-overlay" class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 w-full max-w-md rounded-xl bg-p4a-surface shadow-2xl">
+      <div class="flex items-center justify-between px-6 pt-6 pb-2">
+        <h2 class="text-xl font-bold text-p4a-ink">Almost done!</h2>
+        <button id="auth-panel-close" class="text-p4a-link hover:text-p4a-ink transition-colors">
+          <Icon name="ph:x" class="w-5 h-5" />
+        </button>
+      </div>
+
+      <div class="px-6 pb-6">
+        <p class="text-p4a-ink mb-5">To save your directory entry, sign in to your P4A account. Your directory entry is ready to go — we'll submit it the moment you sign in.</p>
+
+        <!-- Sign-in form -->
+        <form id="auth-signin-form" novalidate>
+          <div class="mb-4">
+            <label class="block font-semibold text-p4a-ink mb-1 text-sm" for="auth-signin-email">Email</label>
+            <input id="auth-signin-email" type="email" placeholder="you@example.com"
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link" />
+          </div>
+          <div class="mb-4">
+            <label class="block font-semibold text-p4a-ink mb-1 text-sm" for="auth-signin-password">Password</label>
+            <input id="auth-signin-password" type="password" placeholder="••••••••"
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link" />
+          </div>
+          <p id="auth-signin-error" class="hidden text-sm text-red-600 mb-3"></p>
+          <button id="auth-signin-btn" type="submit"
+            class="w-full px-5 py-2 rounded-lg bg-p4a-link text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+            Sign in
+          </button>
+          <p class="mt-4 text-center text-sm text-p4a-link">
+            No account?
+            <button type="button" id="auth-show-signup" class="text-p4a-link font-semibold underline">Join free</button>
+          </p>
+        </form>
+
+        <!-- Sign-up form -->
+        <form id="auth-signup-form" class="hidden" novalidate>
+          <p class="text-sm text-p4a-ink mb-4">Enter your email and we'll send you a link to create your free account. Your directory entry will be waiting when you return.</p>
+          <div class="mb-4">
+            <label class="block font-semibold text-p4a-ink mb-1 text-sm" for="auth-signup-email">Email</label>
+            <input id="auth-signup-email" type="email" placeholder="you@example.com"
+              class="w-full px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link" />
+          </div>
+          <p id="auth-signup-error" class="hidden text-sm text-red-600 mb-3"></p>
+          <button id="auth-signup-btn" type="submit"
+            class="w-full px-5 py-2 rounded-lg bg-p4a-link text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+            Send signup link
+          </button>
+          <p class="mt-4 text-center text-sm text-p4a-link">
+            Already have an account?
+            <button type="button" id="auth-show-signin" class="text-p4a-link font-semibold underline">Sign in</button>
+          </p>
+        </form>
+
+        <!-- Sign-up success -->
+        <div id="auth-signup-success" class="hidden text-center py-4">
+          <p class="text-p4a-ink font-semibold mb-2">Check your inbox!</p>
+          <p class="text-sm text-p4a-link">We've sent you a signup link. Come back and add your entry once your account is ready.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</Layout>
+
+<script is:inline define:vars={{ apiBase, apiKey }}>
+(async () => {
+
+  const ENTRY_TYPE_LABELS = {
+    civic_organization:    'Civic organization',
+    volunteer_opportunity: 'Volunteer opportunity',
+    upcoming_event:        'Upcoming events',
+    call_for_action:       'Calls for action',
+    civic_resource:        'Civic Resources',
+  };
+
+  const ENTRY_TYPE_DESCRIPTIONS = {
+    civic_organization:    'Community groups, nonprofits or government',
+    volunteer_opportunity: 'Community groups, nonprofits or government',
+    upcoming_event:        'Town halls, marches or gatherings, etc',
+    call_for_action:       'Specific actions, calls, comments, votes, advocation',
+    civic_resource:        'Guides, tools, templates, instructions',
+  };
+
+  // -----------------------------------------------------------------------
+  // Auth
+  // -----------------------------------------------------------------------
+  let sessionToken = null;  // set after inline sign-in on this page
+
+  function authHeaders() {
+    const headers = { 'x-api-key': apiKey, 'Content-Type': 'application/json' };
+    if (sessionToken) headers['Authorization'] = `Bearer ${sessionToken}`;
+    return headers;
+  }
+
+  // -----------------------------------------------------------------------
+  // State
+  // -----------------------------------------------------------------------
+  let allEntries = [];
+  let sortCol = 'created_at';
+  let sortDir = 'desc';
+  let currentUserPid = null;
+  let editingPid = null;
+  let pendingPayload = null;  // held while user completes inline sign-in
+  let focusAreaCategories = [];  // loaded once on boot
+  let selectedFocusAreaPids = [];
+
+  // -----------------------------------------------------------------------
+  // Focus areas
+  // -----------------------------------------------------------------------
+  async function loadFocusAreaCategories() {
+    try {
+      const res = await fetch(`${apiBase}/focus-areas/categories`, {
+        headers: { 'x-api-key': apiKey },
+      });
+      if (res.ok) focusAreaCategories = await res.json();
+    } catch { /* silent */ }
+    renderFocusAreaPicker();
+  }
+
+  function renderFocusAreaPicker() {
+    const picker = document.getElementById('focus-area-picker');
+    if (!focusAreaCategories.length) {
+      picker.innerHTML = '<span class="text-p4a-link text-xs">No focus areas available.</span>';
+      return;
+    }
+    picker.innerHTML = focusAreaCategories.map(cat => `
+      <div>
+        <p class="font-semibold text-xs text-p4a-link uppercase tracking-wide mb-1">${escHtml(cat.name)}</p>
+        <div class="space-y-1 pl-1">
+          ${cat.focus_areas.map(fa => `
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                class="fa-checkbox accent-p4a-link"
+                value="${escHtml(fa.pid)}"
+                ${selectedFocusAreaPids.includes(fa.pid) ? 'checked' : ''}
+              />
+              <span class="text-sm text-p4a-ink">${escHtml(fa.name)}</span>
+            </label>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    // Enforce max 3
+    picker.querySelectorAll('.fa-checkbox').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const checked = [...picker.querySelectorAll('.fa-checkbox:checked')];
+        if (checked.length > 3) {
+          cb.checked = false;
+          document.getElementById('focus-area-error').classList.remove('hidden');
+          return;
+        }
+        document.getElementById('focus-area-error').classList.add('hidden');
+        selectedFocusAreaPids = checked.map(c => c.value);
+      });
+    });
+  }
+
+  function getSelectedFocusAreaPids() {
+    const picker = document.getElementById('focus-area-picker');
+    return [...picker.querySelectorAll('.fa-checkbox:checked')].map(c => c.value);
+  }
+
+  // Silently check if the user is already signed in via p4a_session cookie
+  async function tryAutoAuth() {
+    try {
+      const res = await fetch(`${apiBase}/session/me`, {
+        credentials: 'include',
+        headers: { 'x-api-key': apiKey },
+      });
+      if (res.ok) {
+        const user = await res.json();
+        currentUserPid = user.pid;
+        // Also grab the token from the response cookie path isn't accessible,
+        // but for POST/PUT/DELETE we can rely on credentials:'include' too
+        document.getElementById('dir-add-btn').classList.remove('hidden');
+      }
+    } catch { /* not signed in, silent */ }
+  }
+
+  // -----------------------------------------------------------------------
+  // Load entries
+  // -----------------------------------------------------------------------
+  async function loadEntries() {
+    const loading = document.getElementById('dir-loading');
+    const error = document.getElementById('dir-error');
+    const tableWrap = document.getElementById('dir-table-wrap');
+
+    try {
+      const res = await fetch(`${apiBase}/directory`, {
+        headers: { 'x-api-key': apiKey }
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      allEntries = await res.json();
+
+      loading.classList.add('hidden');
+      tableWrap.classList.remove('hidden');
+      renderTable();
+    } catch (err) {
+      loading.classList.add('hidden');
+      error.classList.remove('hidden');
+      error.textContent = `Failed to load directory: ${err.message}`;
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // Render table
+  // -----------------------------------------------------------------------
+  function getFiltered() {
+    const q = (document.getElementById('dir-search').value || '').toLowerCase();
+    let list = allEntries;
+    if (q) {
+      list = list.filter(e =>
+        e.title.toLowerCase().includes(q) ||
+        (ENTRY_TYPE_LABELS[e.entry_type] || e.entry_type).toLowerCase().includes(q) ||
+        (e.description || '').toLowerCase().includes(q) ||
+        (e.focus_areas || []).some(fa => fa.name.toLowerCase().includes(q) || fa.category_name.toLowerCase().includes(q))
+      );
+    }
+    return [...list].sort((a, b) => {
+      const av = (a[sortCol] ?? '');
+      const bv = (b[sortCol] ?? '');
+      if (av === bv) return 0;
+      const r = av < bv ? -1 : 1;
+      return sortDir === 'asc' ? r : -r;
+    });
+  }
+
+  function formatDate(isoStr) {
+    if (!isoStr) return '—';
+    return new Date(isoStr).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('dir-tbody');
+    const emptyRow = document.getElementById('dir-empty');
+    const entries = getFiltered();
+
+    // Update sort indicators
+    ['title', 'entry_type', 'occurs_at'].forEach(col => {
+      const el = document.getElementById(`sort-${col}`);
+      if (!el) return;
+      el.textContent = sortCol === col ? (sortDir === 'asc' ? '▲' : '▼') : '';
+    });
+
+    // Clear data rows but keep the emptyRow element in the DOM
+    [...tbody.children].forEach(el => { if (el !== emptyRow) el.remove(); });
+
+    if (entries.length === 0) {
+      emptyRow.querySelector('td').textContent = document.getElementById('dir-search').value
+        ? 'No entries match your search.'
+        : 'No directory entries.';
+      emptyRow.classList.remove('hidden');
+      return;
+    }
+
+    emptyRow.classList.add('hidden');
+
+    tbody.insertAdjacentHTML('beforeend', entries.map(e => {
+      const typeLabel = ENTRY_TYPE_LABELS[e.entry_type] || e.entry_type;
+      const dateStr = formatDate(e.occurs_at);
+      const isOwner = currentUserPid && e.creator_pid === currentUserPid;
+
+      const focusAreaHtml = e.focus_areas && e.focus_areas.length > 0
+        ? e.focus_areas.map(fa =>
+            `<span class="inline-block px-3 py-1 bg-p4a-ink text-white rounded-full text-xs mb-1">${fa.category_name} — ${fa.name}</span>`
+          ).join('<br/>')
+        : '<span class="text-xs text-p4a-link">—</span>';
+
+      const actionsHtml = isOwner ? `
+        <div class="flex items-center gap-2 shrink-0 ml-2">
+          <button class="dir-edit text-p4a-link hover:text-p4a-ink transition-colors" data-pid="${e.pid}" title="Edit">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"/>
+            </svg>
+          </button>
+          <button class="dir-delete text-p4a-link hover:text-red-500 transition-colors" data-pid="${e.pid}" title="Delete">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V216a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,176H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"/>
+            </svg>
+          </button>
+        </div>
+      ` : '';
+
+      return `
+        <tr class="border-b border-p4a-link last:border-0 hover:bg-p4a-body-bg transition-colors">
+          <td class="px-4 py-3 align-top">
+            <button class="dir-detail text-p4a-link hover:underline decoration-2 text-left" data-pid="${e.pid}">
+              ${escHtml(e.title)}
+            </button>
+          </td>
+          <td class="px-4 py-3 align-top text-p4a-ink">${escHtml(typeLabel)}</td>
+          <td class="px-4 py-3 align-top text-p4a-ink">${escHtml(dateStr)}</td>
+          <td class="px-4 py-3 align-top">
+            <div class="flex items-start justify-between gap-2">
+              <div>${focusAreaHtml}</div>
+              ${actionsHtml}
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join(''));
+
+    // Bind row buttons
+    tbody.querySelectorAll('.dir-detail').forEach(btn => {
+      btn.addEventListener('click', () => openDetail(btn.dataset.pid));
+    });
+    tbody.querySelectorAll('.dir-edit').forEach(btn => {
+      btn.addEventListener('click', () => openForm(btn.dataset.pid));
+    });
+    tbody.querySelectorAll('.dir-delete').forEach(btn => {
+      btn.addEventListener('click', () => handleDelete(btn.dataset.pid));
+    });
+  }
+
+  function linkifyDescription(str) {
+    return escHtml(str).replace(
+      /(https?:\/\/[^\s<>"]+)/g,
+      '<a href="$1" target="_blank" rel="noopener" class="text-p4a-link hover:underline break-all">$1</a>'
+    );
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // -----------------------------------------------------------------------
+  // Sort
+  // -----------------------------------------------------------------------
+  ['title', 'entry_type', 'occurs_at'].forEach(col => {
+    document.getElementById(`th-${col}`)?.addEventListener('click', () => {
+      if (sortCol === col) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortCol = col;
+        sortDir = 'asc';
+      }
+      renderTable();
+    });
+  });
+
+  // Search
+  document.getElementById('dir-search').addEventListener('input', () => renderTable());
+
+  // -----------------------------------------------------------------------
+  // Detail modal
+  // -----------------------------------------------------------------------
+  function openDetail(pid) {
+    const entry = allEntries.find(e => e.pid === pid);
+    if (!entry) return;
+
+    document.getElementById('detail-title').textContent = entry.title;
+
+    const focusAreas = entry.focus_areas && entry.focus_areas.length > 0
+      ? entry.focus_areas.map(fa =>
+          `<span class="inline-block px-3 py-1 bg-p4a-ink text-white rounded-full text-xs mr-1 mb-1">${escHtml(fa.category_name)} — ${escHtml(fa.name)}</span>`
+        ).join('')
+      : '—';
+
+    document.getElementById('detail-body').innerHTML = `
+      <div class="grid grid-cols-[8rem_1fr] gap-x-4 gap-y-2">
+        <span class="font-semibold text-p4a-link text-right">Type</span>
+        <span class="text-p4a-ink">${escHtml(ENTRY_TYPE_LABELS[entry.entry_type] || entry.entry_type)}</span>
+
+        <span class="font-semibold text-p4a-link text-right">Date</span>
+        <span class="text-p4a-ink">${escHtml(formatDate(entry.occurs_at))}</span>
+
+        <span class="font-semibold text-p4a-link text-right">URL</span>
+        <a href="${escHtml(entry.url)}" target="_blank" rel="noopener" class="text-p4a-link hover:underline truncate">${escHtml(entry.url)}</a>
+
+        <span class="font-semibold text-p4a-link text-right">Focus Areas</span>
+        <span class="text-p4a-ink">${focusAreas}</span>
+
+        <span class="font-semibold text-p4a-link text-right">Description</span>
+        <span class="text-p4a-ink leading-relaxed">${linkifyDescription(entry.description)}</span>
+      </div>
+    `;
+
+    const modal = document.getElementById('detail-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeDetail() {
+    const modal = document.getElementById('detail-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  document.getElementById('detail-close').addEventListener('click', closeDetail);
+  document.getElementById('detail-overlay').addEventListener('click', closeDetail);
+
+  // -----------------------------------------------------------------------
+  // Create/Edit modal
+  // -----------------------------------------------------------------------
+
+  // Build radio buttons
+  const radiosContainer = document.getElementById('type-radios');
+  Object.entries(ENTRY_TYPE_LABELS).forEach(([key, label]) => {
+    const div = document.createElement('label');
+    div.className = 'flex items-start gap-2 cursor-pointer';
+    div.innerHTML = `
+      <input type="radio" name="entry_type" value="${key}" class="mt-0.5 shrink-0 accent-p4a-link" />
+      <span class="text-sm text-p4a-ink"><strong>${escHtml(label)}</strong> — ${escHtml(ENTRY_TYPE_DESCRIPTIONS[key])}</span>
+    `;
+    radiosContainer.appendChild(div);
+  });
+
+  function openForm(pid) {
+    editingPid = pid || null;
+    const isEdit = !!pid;
+    const entry = isEdit ? allEntries.find(e => e.pid === pid) : null;
+
+    document.getElementById('form-modal-title').textContent = isEdit ? 'Edit Directory Entry' : 'New Civic Directory Entry';
+    document.getElementById('form-submit').textContent = isEdit ? 'Save Changes' : 'Create Entry';
+    document.getElementById('form-pid').value = pid || '';
+
+    // Reset errors
+    ['type-error', 'title-error', 'desc-error', 'url-error', 'form-error'].forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
+
+    // Populate fields
+    document.getElementById('form-title').value = entry ? entry.title : '';
+    document.getElementById('form-desc').value = entry ? entry.description : '';
+    document.getElementById('form-url').value = entry ? entry.url : '';
+    document.getElementById('form-date').value = entry && entry.occurs_at
+      ? entry.occurs_at.split('T')[0]
+      : '';
+
+    // Set radio
+    document.querySelectorAll('input[name="entry_type"]').forEach(r => {
+      r.checked = entry ? r.value === entry.entry_type : false;
+    });
+
+    // Set focus areas
+    selectedFocusAreaPids = entry ? entry.focus_areas.map(fa => fa.pid) : [];
+    renderFocusAreaPicker();
+
+    const modal = document.getElementById('form-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeForm() {
+    const modal = document.getElementById('form-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    editingPid = null;
+  }
+
+  document.getElementById('form-close').addEventListener('click', closeForm);
+  document.getElementById('form-cancel').addEventListener('click', closeForm);
+  document.getElementById('form-overlay').addEventListener('click', closeForm);
+
+  document.getElementById('dir-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    const selectedType = document.querySelector('input[name="entry_type"]:checked')?.value;
+    const title = document.getElementById('form-title').value.trim();
+    const desc = document.getElementById('form-desc').value.trim();
+    const rawUrl = document.getElementById('form-url').value.trim();
+    const date = document.getElementById('form-date').value;
+
+    if (!selectedType) {
+      document.getElementById('type-error').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('type-error').classList.add('hidden');
+    }
+
+    if (title.length < 3 || title.length > 200) {
+      document.getElementById('title-error').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('title-error').classList.add('hidden');
+    }
+
+    if (desc.length < 50 || desc.length > 500) {
+      document.getElementById('desc-error').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('desc-error').classList.add('hidden');
+    }
+
+    if (!rawUrl) {
+      document.getElementById('url-error').classList.remove('hidden');
+      valid = false;
+    } else {
+      document.getElementById('url-error').classList.add('hidden');
+    }
+
+    if (!valid) return;
+
+    const normalizedUrl = !/^https?:\/\//i.test(rawUrl) ? `https://${rawUrl}` : rawUrl;
+
+    const payload = {
+      title,
+      entry_type: selectedType,
+      description: desc,
+      url: normalizedUrl,
+      occurs_at: date || null,
+      focus_area_pids: getSelectedFocusAreaPids(),
+    };
+
+    const submitBtn = document.getElementById('form-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving…';
+    document.getElementById('form-error').classList.add('hidden');
+
+    try {
+      const method = editingPid ? 'PUT' : 'POST';
+      const url = editingPid ? `${apiBase}/directory/${editingPid}` : `${apiBase}/directory`;
+      const res = await fetch(url, {
+        method,
+        credentials: 'include',
+        headers: authHeaders(),
+        body: JSON.stringify(payload),
+      });
+
+      if (res.status === 401) {
+        // Not signed in — hold payload and show inline auth
+        pendingPayload = { payload, editingPid };
+        closeForm();
+        openAuthPanel();
+        return;
+      }
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.detail || `HTTP ${res.status}`);
+      }
+
+      const saved = await res.json();
+
+      if (editingPid) {
+        const idx = allEntries.findIndex(e => e.pid === editingPid);
+        if (idx !== -1) allEntries[idx] = saved;
+      } else {
+        allEntries.unshift(saved);
+      }
+
+      renderTable();
+      closeForm();
+    } catch (err) {
+      const errEl = document.getElementById('form-error');
+      errEl.textContent = `Error: ${err.message}`;
+      errEl.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = editingPid ? 'Save Changes' : 'Create Entry';
+    }
+  });
+
+  // -----------------------------------------------------------------------
+  // Delete
+  // -----------------------------------------------------------------------
+  async function handleDelete(pid) {
+    if (!confirm('Delete this directory entry? This cannot be undone.')) return;
+
+    try {
+      const res = await fetch(`${apiBase}/directory/${pid}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: authHeaders(),
+      });
+      if (res.status === 401) { openAuthPanel(); return; }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      allEntries = allEntries.filter(e => e.pid !== pid);
+      renderTable();
+    } catch (err) {
+      alert(`Failed to delete: ${err.message}`);
+    }
+  }
+
+  document.getElementById('dir-add-btn').addEventListener('click', () => openForm(null));
+
+  // Keyboard dismiss
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeDetail();
+      closeForm();
+      closeAuthPanel();
+    }
+  });
+
+  // -----------------------------------------------------------------------
+  // Inline auth panel
+  // -----------------------------------------------------------------------
+  function openAuthPanel() {
+    document.getElementById('auth-panel').classList.remove('hidden');
+    document.getElementById('auth-panel').classList.add('flex');
+    document.getElementById('auth-signin-email').focus();
+  }
+
+  function closeAuthPanel() {
+    document.getElementById('auth-panel').classList.add('hidden');
+    document.getElementById('auth-panel').classList.remove('flex');
+    document.getElementById('auth-signin-error').classList.add('hidden');
+    document.getElementById('auth-signup-success').classList.add('hidden');
+    document.getElementById('auth-signin-form').classList.remove('hidden');
+    document.getElementById('auth-signup-form').classList.add('hidden');
+  }
+
+  document.getElementById('auth-panel-overlay').addEventListener('click', closeAuthPanel);
+  document.getElementById('auth-panel-close').addEventListener('click', closeAuthPanel);
+
+  // Toggle between sign-in and sign-up
+  document.getElementById('auth-show-signup').addEventListener('click', () => {
+    document.getElementById('auth-signin-form').classList.add('hidden');
+    document.getElementById('auth-signup-form').classList.remove('hidden');
+  });
+  document.getElementById('auth-show-signin').addEventListener('click', () => {
+    document.getElementById('auth-signup-form').classList.add('hidden');
+    document.getElementById('auth-signin-form').classList.remove('hidden');
+  });
+
+  // Sign-in submit
+  document.getElementById('auth-signin-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('auth-signin-email').value.trim();
+    const password = document.getElementById('auth-signin-password').value;
+    const errEl = document.getElementById('auth-signin-error');
+    const btn = document.getElementById('auth-signin-btn');
+
+    errEl.classList.add('hidden');
+    btn.disabled = true;
+    btn.textContent = 'Signing in…';
+
+    try {
+      const res = await fetch(`${apiBase}/session/create`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) throw new Error('Invalid email or password.');
+      const data = await res.json();
+
+      sessionToken = data.access_token;
+      currentUserPid = data.user.pid;
+
+      closeAuthPanel();
+
+      // Retry the held payload
+      if (pendingPayload) {
+        const { payload, editingPid: ePid } = pendingPayload;
+        pendingPayload = null;
+        const method = ePid ? 'PUT' : 'POST';
+        const url = ePid ? `${apiBase}/directory/${ePid}` : `${apiBase}/directory`;
+        const saveRes = await fetch(url, {
+          method,
+          credentials: 'include',
+          headers: authHeaders(),
+          body: JSON.stringify(payload),
+        });
+        if (!saveRes.ok) throw new Error('Entry could not be saved after sign-in.');
+        const saved = await saveRes.json();
+        if (ePid) {
+          const idx = allEntries.findIndex(e => e.pid === ePid);
+          if (idx !== -1) allEntries[idx] = saved;
+        } else {
+          allEntries.unshift(saved);
+        }
+        renderTable();
+      }
+
+      // Show + and any owned pencil/trash
+      document.getElementById('dir-add-btn').classList.remove('hidden');
+      renderTable();
+
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Sign in';
+    }
+  });
+
+  // Sign-up submit (just email → start_signup)
+  document.getElementById('auth-signup-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('auth-signup-email').value.trim();
+    const errEl = document.getElementById('auth-signup-error');
+    const btn = document.getElementById('auth-signup-btn');
+
+    errEl.classList.add('hidden');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const body = { email };
+      if (pendingPayload) body.directory_entry = pendingPayload.payload;
+
+      const res = await fetch(`${apiBase}/user/start_signup`, {
+        method: 'POST',
+        headers: { 'x-api-key': apiKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}));
+        throw new Error(d.detail || 'Could not start signup.');
+      }
+      pendingPayload = null;
+      document.getElementById('auth-signup-form').classList.add('hidden');
+      document.getElementById('auth-signup-success').classList.remove('hidden');
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send signup link';
+    }
+  });
+
+  // -----------------------------------------------------------------------
+  // Boot
+  // -----------------------------------------------------------------------
+  await Promise.all([tryAutoAuth(), loadFocusAreaCategories()]);
+  loadEntries();
+
+})();
+</script>

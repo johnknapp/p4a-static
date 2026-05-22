@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  text?: string;
+  position?: 'left' | 'right';
+  width?: string;
+  id: string;
+}
+
+const { text, position = 'right', width = 'w-80', id } = Astro.props;
+const positionClass = position === 'left' ? 'left-0' : 'right-0';
+---
+
+<span class="relative inline-flex items-center" data-popover-id={id}>
+  <button
+    class="ua-popover-trigger text-p4a-body-text/40 hover:text-p4a-body-text transition-colors"
+    aria-label="Help"
+    aria-expanded="false"
+  >
+    <Icon name="ph:question" class="text-2xl text-p4a-link" />
+  </button>
+  <div
+    class={`ua-popover-panel hidden absolute top-full mt-2 bg-p4a-surface border border-p4a-body-text text-p4a-body-text text-sm rounded-md shadow-xl p-3 z-50 ${positionClass} ${width}`}
+  >
+    <button class="ua-popover-close absolute top-2 right-2 text-p4a-link hover:text-p4a-body-text transition-colors" aria-label="Close">
+      <Icon name="ph:x" class="text-base" />
+    </button>
+    <div class="pr-4 space-y-2">
+      <slot>{text}</slot>
+    </div>
+  </div>
+</span>
+
+<script is:inline>
+  document.querySelectorAll('[data-popover-id]').forEach(function(popover) {
+    const trigger = popover.querySelector('.ua-popover-trigger');
+    const panel = popover.querySelector('.ua-popover-panel');
+    const closeBtn = popover.querySelector('.ua-popover-close');
+
+    function open() {
+      panel.classList.remove('hidden');
+      trigger.setAttribute('aria-expanded', 'true');
+      document.addEventListener('click', onOutsideClick);
+    }
+
+    function close() {
+      panel.classList.add('hidden');
+      trigger.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('click', onOutsideClick);
+    }
+
+    function onOutsideClick(e) {
+      if (!popover.contains(e.target)) close();
+    }
+
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      panel.classList.contains('hidden') ? open() : close();
+    });
+
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      close();
+    });
+  });
+</script>
