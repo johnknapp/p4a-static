@@ -195,8 +195,20 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
             <label class="block font-semibold text-p4a-ink mb-1">
               Focus Areas <span class="font-normal text-p4a-link text-sm">(up to 3)</span>
             </label>
-            <div id="focus-area-picker" class="border border-p4a-link rounded-md px-3 py-2 max-h-48 overflow-y-auto space-y-3 bg-p4a-body-bg text-sm text-p4a-ink">
-              <span class="text-p4a-link text-xs">Loading…</span>
+            <div id="fa-combobox" class="relative">
+              <button type="button" id="fa-trigger"
+                class="w-full flex items-center justify-between px-3 py-2 rounded-md border border-p4a-link bg-p4a-body-bg text-p4a-ink text-sm focus:outline-none focus:ring-2 focus:ring-p4a-link">
+                <span id="fa-trigger-label" class="truncate text-p4a-link">Select focus areas…</span>
+                <span id="fa-trigger-count" class="ml-2 text-xs text-p4a-link shrink-0 hidden"></span>
+                <Icon name="ph:caret-up-down" class="ml-2 w-4 h-4 shrink-0 opacity-50 text-p4a-ink" />
+              </button>
+              <div id="fa-dropdown" class="hidden fixed z-[200] rounded-md border border-p4a-link bg-p4a-surface shadow-xl">
+                <div class="px-3 pt-3 pb-2">
+                  <input id="fa-search" type="text" placeholder="Search focus areas…"
+                    class="w-full px-3 py-2 rounded border border-p4a-link bg-p4a-body-bg text-p4a-ink text-base focus:outline-none focus:ring-2 focus:ring-p4a-link" />
+                </div>
+                <div id="fa-list" class="overflow-y-auto py-1"></div>
+              </div>
             </div>
             <p id="focus-area-error" class="hidden text-sm text-red-600 mt-1">You can select up to 3 focus areas.</p>
           </div>
@@ -357,49 +369,132 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
     renderFocusAreaPicker();
   }
 
-  function renderFocusAreaPicker() {
-    const picker = document.getElementById('focus-area-picker');
-    if (!focusAreaCategories.length) {
-      picker.innerHTML = '<span class="text-p4a-link text-xs">No focus areas available.</span>';
+  const SVG_CHECK = '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 256 256"><path fill="currentColor" d="m229.66 77.66l-128 128a8 8 0 0 1-11.32 0l-56-56a8 8 0 0 1 11.32-11.32L96 188.69L218.34 66.34a8 8 0 0 1 11.32 11.32"/></svg>';
+
+  function renderFocusAreaList(searchVal = '') {
+    const list = document.getElementById('fa-list');
+    const q = searchVal.toLowerCase();
+    const cats = q
+      ? focusAreaCategories.map(cat => ({
+          ...cat,
+          focus_areas: cat.focus_areas.filter(fa =>
+            fa.name.toLowerCase().includes(q) || cat.name.toLowerCase().includes(q)
+          )
+        })).filter(cat => cat.focus_areas.length > 0)
+      : focusAreaCategories;
+
+    if (!cats.length) {
+      list.innerHTML = '<p class="px-3 py-2 text-sm text-p4a-link">No focus areas found.</p>';
       return;
     }
-    picker.innerHTML = focusAreaCategories.map(cat => `
+
+    list.innerHTML = cats.map(cat => `
       <div>
-        <p class="font-semibold text-xs text-p4a-link uppercase tracking-wide mb-1">${escHtml(cat.name)}</p>
-        <div class="space-y-1 pl-1">
-          ${cat.focus_areas.map(fa => `
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                class="fa-checkbox accent-p4a-link"
-                value="${escHtml(fa.pid)}"
-                ${selectedFocusAreaPids.includes(fa.pid) ? 'checked' : ''}
-              />
-              <span class="text-sm text-p4a-ink">${escHtml(fa.name)}</span>
-            </label>
-          `).join('')}
-        </div>
+        <p class="px-4 py-2 text-base font-bold text-p4a-link">${escHtml(cat.name)}</p>
+        ${cat.focus_areas.map(fa => {
+          const selected = selectedFocusAreaPids.includes(fa.pid);
+          const disabled = !selected && selectedFocusAreaPids.length >= 3;
+          return `<button type="button"
+            class="fa-item w-full flex items-center gap-3 px-8 py-3 text-base text-left text-p4a-ink hover:bg-p4a-body-bg transition-colors ${disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}"
+            data-pid="${escHtml(fa.pid)}"
+            ${disabled ? 'disabled' : ''}>
+            <span class="${selected ? 'opacity-100' : 'opacity-0'}">${SVG_CHECK}</span>
+            ${escHtml(fa.name)}
+          </button>`;
+        }).join('')}
       </div>
     `).join('');
 
-    // Enforce max 3
-    picker.querySelectorAll('.fa-checkbox').forEach(cb => {
-      cb.addEventListener('change', () => {
-        const checked = [...picker.querySelectorAll('.fa-checkbox:checked')];
-        if (checked.length > 3) {
-          cb.checked = false;
-          document.getElementById('focus-area-error').classList.remove('hidden');
-          return;
+    list.querySelectorAll('.fa-item:not([disabled])').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pid = btn.dataset.pid;
+        const idx = selectedFocusAreaPids.indexOf(pid);
+        if (idx >= 0) {
+          selectedFocusAreaPids.splice(idx, 1);
+        } else {
+          if (selectedFocusAreaPids.length >= 3) return;
+          selectedFocusAreaPids.push(pid);
         }
         document.getElementById('focus-area-error').classList.add('hidden');
-        selectedFocusAreaPids = checked.map(c => c.value);
+        updateFaTriggerLabel();
+        renderFocusAreaList(document.getElementById('fa-search').value);
       });
     });
   }
 
+  function updateFaTriggerLabel() {
+    const label = document.getElementById('fa-trigger-label');
+    const count = document.getElementById('fa-trigger-count');
+    if (selectedFocusAreaPids.length === 0) {
+      label.textContent = 'Select focus areas…';
+      count.classList.add('hidden');
+    } else {
+      const names = selectedFocusAreaPids.map(pid => {
+        for (const cat of focusAreaCategories) {
+          const fa = cat.focus_areas.find(a => a.pid === pid);
+          if (fa) return fa.name;
+        }
+        return pid;
+      });
+      label.textContent = names.length === 1 ? names[0] : `${names.length} areas selected`;
+      count.textContent = `${names.length}/3`;
+      count.classList.remove('hidden');
+    }
+  }
+
+  function renderFocusAreaPicker() {
+    if (!focusAreaCategories.length) return;
+    renderFocusAreaList();
+    updateFaTriggerLabel();
+
+    const trigger = document.getElementById('fa-trigger');
+    const dropdown = document.getElementById('fa-dropdown');
+    const search = document.getElementById('fa-search');
+
+    function positionDropdown() {
+      const rect = trigger.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom - 8;
+      const spaceAbove = rect.top - 8;
+      const listEl = document.getElementById('fa-list');
+
+      if (spaceBelow >= 300 || spaceBelow >= spaceAbove) {
+        // Open downward
+        dropdown.style.top = `${rect.bottom + 4}px`;
+        dropdown.style.bottom = 'auto';
+        listEl.style.maxHeight = `${Math.min(384, spaceBelow - 70)}px`;
+      } else {
+        // Open upward
+        dropdown.style.bottom = `${window.innerHeight - rect.top + 4}px`;
+        dropdown.style.top = 'auto';
+        listEl.style.maxHeight = `${Math.min(384, spaceAbove - 70)}px`;
+      }
+      dropdown.style.left = `${rect.left}px`;
+      dropdown.style.width = `${rect.width}px`;
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !dropdown.classList.contains('hidden');
+      if (isOpen) {
+        dropdown.classList.add('hidden');
+      } else {
+        positionDropdown();
+        dropdown.classList.remove('hidden');
+        search.value = '';
+        search.focus();
+        renderFocusAreaList();
+      }
+    });
+
+    search.addEventListener('input', () => renderFocusAreaList(search.value));
+
+    dropdown.addEventListener('click', (e) => e.stopPropagation());
+
+    document.addEventListener('click', () => dropdown.classList.add('hidden'));
+  }
+
   function getSelectedFocusAreaPids() {
-    const picker = document.getElementById('focus-area-picker');
-    return [...picker.querySelectorAll('.fa-checkbox:checked')].map(c => c.value);
+    return [...selectedFocusAreaPids];
   }
 
   // Silently check if the user is already signed in via p4a_session cookie
@@ -687,7 +782,10 @@ const apiKey = import.meta.env.PUBLIC_P4A_API_KEY;
 
     // Set focus areas
     selectedFocusAreaPids = entry ? entry.focus_areas.map(fa => fa.pid) : [];
-    renderFocusAreaPicker();
+    document.getElementById('fa-dropdown').classList.add('hidden');
+    document.getElementById('fa-search').value = '';
+    updateFaTriggerLabel();
+    renderFocusAreaList();
 
     const modal = document.getElementById('form-modal');
     modal.classList.remove('hidden');
