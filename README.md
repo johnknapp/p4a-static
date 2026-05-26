@@ -9,6 +9,32 @@ A simple, static website built with Astro and Tailwind CSS for the Playbook for 
 - Tailwind v4 - Utility-first CSS framework
 - Google Fonts - Jost sans-serif and Libertinus Serif serif font families
 
+## Civic Directory (`/directory`)
+
+A public-facing civic directory page built as a vanilla JS Astro page (`src/pages/directory.astro`). It supports browsing, searching, and creating/editing directory entries.
+
+### Authentication
+
+`0_static` and `2_fe` run on different origins and cannot share `localStorage`. Authentication is handled via the `p4a_session` **httpOnly cookie** set by the FastAPI backend on `POST /session/create`. All mutating requests from `directory.astro` use `credentials: 'include'` so the cookie is sent cross-origin automatically.
+
+**Silent auth check on page load:** `GET /session/me` (with `credentials: 'include'`) silently resolves the current user without any token exchange. If authenticated, the `+` add button and pencil/trash row actions become active.
+
+**Deferred auth flow:** Users fill the create form first — auth is only checked on submit. If the request returns 401, an inline sign-in/sign-up panel appears. After signing in, the held payload is auto-submitted. If the user has no account, they enter their email and receive a finish-signup link; the directory entry is passed in the `POST /session/start_signup` body and created atomically with the account.
+
+**CORS requirement:** The FastAPI backend must include the Astro origin (`http://localhost:4321` in dev, the production domain in prod) in `allow_origins`, with `allow_credentials=True`.
+
+### Environment Variables
+
+```
+PUBLIC_REPORT_ENDPOINT_URL='http://localhost:8000/report'   # used to derive apiBase
+PUBLIC_P4A_API_KEY='...'
+PUBLIC_ASTRO_URL='http://localhost:4321'
+```
+
+`apiBase` is derived as `PUBLIC_REPORT_ENDPOINT_URL.replace('/report', '')` (e.g. `http://localhost:8000`).
+
+---
+
 ## Report Intake Form
 
 The site includes a public 4-step anonymous report intake form (`/file-a-report`) that submits to the Python backend:
