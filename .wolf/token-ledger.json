@@ -2,14 +2,14 @@
   "version": 1,
   "created_at": "2026-04-11T17:12:03.288Z",
   "lifetime": {
-    "total_tokens_estimated": 361114,
-    "total_reads": 684,
-    "total_writes": 1112,
+    "total_tokens_estimated": 384286,
+    "total_reads": 724,
+    "total_writes": 1189,
     "total_sessions": 2,
     "anatomy_hits": 0,
-    "anatomy_misses": 684,
-    "repeated_reads_blocked": 104,
-    "estimated_savings_vs_bare_cli": 134225
+    "anatomy_misses": 724,
+    "repeated_reads_blocked": 112,
+    "estimated_savings_vs_bare_cli": 143325
   },
   "sessions": [
     {
@@ -10896,6 +10896,699 @@
         "output_tokens_estimated": 3415,
         "reads_count": 10,
         "writes_count": 18,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-10-05-1320",
+      "started": "2026-10-05T20:20:32.927Z",
+      "ended": "2026-10-06T15:24:07.700Z",
+      "reads": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/volunteer.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/feedback.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insider.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/VolunteerInquiryForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/FeedbackSurvey.vue",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2275,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/ExampleForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/2_fe/src/components/IssueForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 56,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2383,
+          "action": "create"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 46,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 136,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 9,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 146,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 39,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 90,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 32,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 99,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 0,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 13,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 98,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 172,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2275,
+        "output_tokens_estimated": 3415,
+        "reads_count": 10,
+        "writes_count": 18,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-10-05-1320",
+      "started": "2026-10-05T20:20:32.927Z",
+      "ended": "2026-10-06T15:24:59.453Z",
+      "reads": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/volunteer.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/feedback.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insider.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/VolunteerInquiryForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/FeedbackSurvey.vue",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2275,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/ExampleForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/2_fe/src/components/IssueForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 56,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2383,
+          "action": "create"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 46,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 136,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 9,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 146,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 39,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 90,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 32,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 99,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 0,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 13,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 98,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 172,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 76,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2275,
+        "output_tokens_estimated": 3491,
+        "reads_count": 10,
+        "writes_count": 19,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-10-05-1320",
+      "started": "2026-10-05T20:20:32.927Z",
+      "ended": "2026-10-06T15:26:25.636Z",
+      "reads": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/volunteer.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/feedback.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insider.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/VolunteerInquiryForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/FeedbackSurvey.vue",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2275,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/ExampleForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/2_fe/src/components/IssueForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 56,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2383,
+          "action": "create"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 46,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 136,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 9,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 146,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 39,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 90,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 32,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 99,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 0,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 13,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 98,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 172,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 76,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 92,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2275,
+        "output_tokens_estimated": 3583,
+        "reads_count": 10,
+        "writes_count": 20,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-10-05-1320",
+      "started": "2026-10-05T20:20:32.927Z",
+      "ended": "2026-10-06T15:28:38.767Z",
+      "reads": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/volunteer.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/feedback.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insider.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/VolunteerInquiryForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/FeedbackSurvey.vue",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2275,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/ExampleForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/jk/dev/p4a/2_fe/src/components/IssueForm.vue",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 56,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 2383,
+          "action": "create"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 46,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/pages/insiders.astro",
+          "tokens_estimated": 136,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 9,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 146,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 39,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 90,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 32,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 99,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 0,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 13,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 10,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 98,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 172,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+          "tokens_estimated": 76,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+          "tokens_estimated": 92,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2275,
+        "output_tokens_estimated": 3583,
+        "reads_count": 10,
+        "writes_count": 20,
         "repeated_reads_blocked": 2,
         "anatomy_lookups": 0
       }

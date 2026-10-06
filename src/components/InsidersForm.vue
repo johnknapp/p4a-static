@@ -263,6 +263,16 @@ const submitForm = async (formData: any) => {
 </template>
 
 <style scoped>
+/* Fix progress bar vertical alignment */
+:deep(.formkit-steps-progress) {
+  align-items: center;
+}
+
+:deep(.formkit-progress-bar) {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
 /* Force Jost font family on FormKit elements */
 :deep(.formkit-outer),
 :deep(.formkit-wrapper),

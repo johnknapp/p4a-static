@@ -102,3 +102,9 @@
 | 17:53 | Session end: 18 writes across 3 files (Layout.astro, InsidersForm.vue, insiders.astro) | 10 reads | ~5690 tok |
 | 17:56 | Session end: 18 writes across 3 files (Layout.astro, InsidersForm.vue, insiders.astro) | 10 reads | ~5690 tok |
 | 18:22 | Session end: 18 writes across 3 files (Layout.astro, InsidersForm.vue, insiders.astro) | 10 reads | ~5690 tok |
+| 08:24 | Session end: 18 writes across 3 files (Layout.astro, InsidersForm.vue, insiders.astro) | 10 reads | ~5690 tok |
+| 08:24 | Edited src/components/InsidersForm.vue | CSS: align-items, top, transform | ~71 |
+| 08:24 | Session end: 19 writes across 3 files (Layout.astro, InsidersForm.vue, insiders.astro) | 10 reads | ~5766 tok |
+| 08:26 | Edited src/layouts/Layout.astro | 6→6 lines | ~86 |
+| 08:26 | Session end: 20 writes across 3 files (Layout.astro, InsidersForm.vue, insiders.astro) | 10 reads | ~5858 tok |
+| 08:28 | Session end: 20 writes across 3 files (Layout.astro, InsidersForm.vue, insiders.astro) | 10 reads | ~5858 tok |

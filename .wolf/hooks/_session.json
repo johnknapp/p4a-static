@@ -161,16 +161,28 @@
       "action": "edit",
       "tokens": 172,
       "at": "2026-10-05T22:51:06.274Z"
+    },
+    {
+      "file": "/Users/jk/dev/p4a/0_static/src/components/InsidersForm.vue",
+      "action": "edit",
+      "tokens": 76,
+      "at": "2026-10-06T15:24:43.926Z"
+    },
+    {
+      "file": "/Users/jk/dev/p4a/0_static/src/layouts/Layout.astro",
+      "action": "edit",
+      "tokens": 92,
+      "at": "2026-10-06T15:26:08.174Z"
     }
   ],
   "edit_counts": {
-    "src/layouts/Layout.astro": 2,
-    "src/components/InsidersForm.vue": 14,
+    "src/layouts/Layout.astro": 3,
+    "src/components/InsidersForm.vue": 15,
     "src/pages/insiders.astro": 2
   },
   "anatomy_hits": 0,
   "anatomy_misses": 10,
   "repeated_reads_warned": 2,
   "cerebrum_warnings": 0,
-  "stop_count": 72
+  "stop_count": 76
 }
