@@ -1,4 +1,53 @@
 {
   "version": 1,
-  "bugs": []
+  "bugs": [
+    {
+      "id": "bug-001",
+      "timestamp": "2026-10-05T22:01:26.739Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/InsidersForm.vue",
+      "root_cause": "Had \"w-5 h-5 mr-3 flex-shrink-0\"",
+      "fix": "Changed to \"w-5 h-5 mr-3 shrink-0\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "vue"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-10-05T22:01:26.739Z"
+    },
+    {
+      "id": "bug-002",
+      "timestamp": "2026-10-05T22:20:59.493Z",
+      "error_message": "Significant refactor of ",
+      "file": "src/components/InsidersForm.vue",
+      "root_cause": "6 lines replaced/restructured",
+      "fix": "Rewrote 11→5 lines (6 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "vue"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-10-05T22:20:59.493Z"
+    },
+    {
+      "id": "bug-003",
+      "timestamp": "2026-10-05T22:29:09.191Z",
+      "error_message": "Incorrect value in code",
+      "file": "src/components/InsidersForm.vue",
+      "root_cause": "Had 'Put my experience or skills to useful work'",
+      "fix": "Changed to 'Apply my skills to something meaningful'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "vue"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-10-05T22:29:09.191Z"
+    }
+  ]
 }

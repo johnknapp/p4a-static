@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
+import InsidersForm from '../components/InsidersForm.vue';
+---
+
+<Layout title="Playbook for America Insiders signup">
+  <main>
+    <div class="container pt-24">
+
+      <div class="max-w-3xl mx-auto">
+        <header class="mb-14">
+          <h1 class="mb-3 text-5xl text-p4a-ink font-bold">Become a P4A Insider</h1>
+          <p class="text-xl max-w-prose leading-relaxed tracking-wider">
+            <!-- P4A Insiders are a select group of thoughtful, engaged people 
+            who get early access to the platform and help us make it better by 
+            sharing candid, practical feedback. -->
+            P4A Insiders are a select group of thoughtful, engaged people who help us improve 
+            the platform by sharing candid, practical feedback we can act on.
+          </p>
+        </header>
+
+        <section class="mb-14">
+          <h2 class="text-3xl text-p4a-ink font-bold mb-2">Help us make P4A better</h2>
+          <p class="leading-relaxed">
+            Playbook for America helps people turn civic problems into practical solutions and execution-ready Playbooks.
+          </p>
+          <p class="mt-4 leading-relaxed">
+            We’re building P4A for people like you, so we want your perspective while we’re still shaping it. Tell us what works, what gets in the way, and what would make the platform more useful.
+          </p>
+        </section>
+
+        <section class="mb-14">
+          <h2 class="text-3xl text-p4a-ink font-bold mb-2">What becoming an Insider looks like</h2>
+          <p class="leading-relaxed">
+            Sign up, spend a little time using the platform, and share your feedback through a simple online form. 
+            From time to time, we may also invite you to react to new features or speak directly with the P4A team.
+          </p>
+        </section>
+
+        <section class="mb-14">
+          <h2 class="text-3xl text-p4a-ink font-bold mb-2">Why become an Insider?</h2>
+          <p class="leading-relaxed">
+            You’ll get an early look at what we’re building, a direct voice in shaping the platform, and a chance to help improve a civic tool designed to turn real problems into practical solutions and measurable results.
+            <!-- You’ll get an early look at what we’re building, a direct voice in shaping the platform, and a chance to help improve a civic tool designed to turn real problems into practical solutions and measurable results. -->
+            <!-- Take an active role shaping the platform. 
+            See it before everybody else.
+            Be sexy and better looking. -->
+          </p>
+        </section>
+
+        <section class="mb-14">
+          <h2 class="text-3xl text-p4a-ink font-bold mb-2">Become a P4A Insider</h2>
+          <p class="leading-relaxed mb-8">
+            Interested? Tell us a little about yourself. We’re looking for thoughtful people who are willing to explore the platform and share useful, candid feedback.
+          </p>
+          <div class="max-w-2xl mx-auto">
+            <InsidersForm client:load />
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>
