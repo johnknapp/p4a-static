@@ -12,7 +12,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" style="visibility:hidden">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,9 +38,6 @@ const { title } = Astro.props;
       gtag('config', 'G-PXYGWT06LV');
     </script>
 
-    <!-- Hide body until CSS is ready to prevent FOUC -->
-    <style>html { visibility: hidden; }</style>
-
     <!-- Apply saved theme before first paint to avoid flash -->
     <script is:inline>
       (function() {
@@ -51,7 +48,6 @@ const { title } = Astro.props;
         if (isDark) {
           document.documentElement.classList.add('dark');
         }
-        document.documentElement.style.visibility = 'visible';
       })();
     </script>
   </head>
@@ -239,5 +235,7 @@ const { title } = Astro.props;
       updateThemeUI();
     </script>
 
+    <!-- Reveal page after stylesheet has applied -->
+    <script is:inline>document.documentElement.style.visibility = '';</script>
   </body>
 </html>
